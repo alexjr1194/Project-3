@@ -4,5 +4,12 @@
   "main": "index.js",
   "repository": "https://github.com/alexjr1194/Project-3.git",
   "author": "alexjr1194 <alexjr1194@me.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.7",
+    "react-router-dom": "^4.2.2"
+  }
 }
