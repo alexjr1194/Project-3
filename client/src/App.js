@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import User from './pages/User';
 
+
+
 class App extends Component {
   render () {
     return (
@@ -14,6 +16,7 @@ class App extends Component {
           </Switch>
         </div>
       </Router>
+
     );
   }
 }
