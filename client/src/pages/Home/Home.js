@@ -66,6 +66,8 @@ class Home extends Component {
                   placeholder='Password (Required)'
                 />
 
+                <FormBtn>Sign In</FormBtn>
+
               </form>
             </div>
 
