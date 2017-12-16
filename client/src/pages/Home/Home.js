@@ -53,15 +53,11 @@ class Home extends Component {
                 <h1 className='jumbotron'>LogIn: </h1>
                 <label for='username'>Username: </label>
                 <Input
-                  value={this.state.username}
-                  onChange={this.hanldeInputChange}
                   name='username'
                   placeholder='Username (Required)'
                 />
                 <label for='password'>Password: </label>
                 <Input
-                  value={this.state.password}
-                  onChange={this.hanldeInputChange}
                   name='password'
                   placeholder='Password (Required)'
                 />
