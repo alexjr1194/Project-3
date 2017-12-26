@@ -10,7 +10,13 @@ const donorSchema = new Schema({
   state: {type: String, required: true},
   phone_number: {type: String, required: true},
   email: {type: String, required: true},
-  status: {type: String}
+  status: {type: String},
+  donations: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Donation"
+    }
+  ]
 },{collection: 'Donor'});
 
 const Donor = mongoose.model("Donor", donorSchema);
