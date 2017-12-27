@@ -3,7 +3,7 @@ const charityController = require("../controllers/charityController.js");
 const donorController = require("../controllers/donorController.js");
 const donationController = require("../controllers/donationController.js");
 
-router.route("/donor")
+router.route("/donor/:donor")
   .get(donorController.findDonor)
   .post(donorController.createDonor)
 
