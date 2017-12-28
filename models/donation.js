@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const donationSchema = new Schema({
-  _creator: {type: Schema.Types.ObjectId, ref: "Donation"},
-  date: {type: String, required: true},
+  _creator: {type: Schema.Types.ObjectId, ref: "Donor"},
+  date: {type: Date, default: Date.now},
   donation_description: {type: String, required: true},
   quantity: {type: String, required: true},
   prepared_time: {type: String, required: true},
