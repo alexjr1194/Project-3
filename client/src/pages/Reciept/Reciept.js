@@ -22,10 +22,12 @@ class Reciept extends Component {
 
   getDonationNumber() {
     let user = this.props.match.params.id;
-    axios.get(`/api/donor/${user}`)
+    axios.get(`/api/donor/populate/${user}`)
       .then((response) => {
+        console.log(response.data[0])
         const donationNumber = response.data[0].donations.length;
-        this.setState({donationNumber}, ()=>console.log(this.state.donationNumber, this.state.user, this.state.donationId));
+        console.log("populated donor :", donationNumber);
+        this.setState({donationNumber: donationNumber}, ()=>console.log(this.state.donationNumber, this.state.user, this.state.donationId));
       })
       .catch(err => console.log(err));
   }

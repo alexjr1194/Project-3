@@ -7,7 +7,8 @@ class Donate extends Component {
   state = {
     user: null,
     userId:null,
-    donation:{}
+    donation:{},
+    donationId:null
   }
 
 componentDidMount () {
@@ -16,11 +17,13 @@ componentDidMount () {
 
  getUser = () =>{
    const user=this.props.match.params.id;
-   this.setState({user: user});
+   console.log(user);
+   this.setState({user: user}, ()=>console.log(this.state.user));
    axios.get(`/api/donor/${user}`)
      .then((response) => {
+       console.log(response)
        const userId = response.data[0]._id;
-       this.setState({userId: userId});
+       this.setState({userId: userId}, ()=>console.log(this.state.userId));
      })
      .catch(err => console.log(err));
  }
@@ -37,8 +40,11 @@ componentDidMount () {
    console.log("test",donation);
    axios.post('/api/donation', donation)
     .then((response) => {
-      console.log("submitted");
       console.log(response);
+      this.setState({donationId:response.data._id})
+    })
+    .then((response) => {
+      this.props.history.push(`/user/${this.state.user}/reciept/${this.state.donationId}`);
     })
     .catch((err)=>console.log(err));
  }
