@@ -5,6 +5,16 @@ class User extends Component {
   state = {
     user: 'Jonh Appleseed'
   }
+
+  componentDidMount(){
+    this.getUser();
+  }
+  
+  getUser(){
+      const user = this.props.match.params.id;
+      this.setState ({user: user})
+  }
+
   render () {
     return (
       <div>

@@ -41,7 +41,7 @@ const donorSeed = [
     zip:"94709",
     state: "CA",
     phone_number: "510-555-5555",
-    email: "test_donor@testdonor.com",
+    email: "testdonor@testdonor.com",
     status: "active"
   },
   {
@@ -52,10 +52,35 @@ const donorSeed = [
     zip:"94709",
     state: "CA",
     phone_number: "510-555-2323",
-    email: "second_donor@testdonor.com",
+    email: "seconddonor@testdonor.com",
     status: "active"
   },
 ];
+
+// const donationSeed = [
+//   {
+//     _creator: {type: Schema.Types.ObjectId, ref: "Donation"}
+//     date: "12/21/2017",
+//     donation_description: "Ham and Eggs",
+//     quantity: "3",
+//     prepared_time: "01:00 P.M.",
+//     shelf_life: "2hrs",
+//     ingredients: "ham and eggs",
+//     location: "2141 Eunice St. Berkeley, CA 94709",
+//     photo_url: "images/hamandeggs.jpg"
+//   },
+//   {
+//     _creator: {type: Schema.Types.ObjectId, ref: "Donation"}
+//     date: "12/21/2017",
+//     donation_description: "waffles",
+//     quantity: "2",
+//     prepared_time: "02:00 P.M.",
+//     shelf_life: "2hrs",
+//     ingredients: "waffles and syrup",
+//     location: "2141 Eunice St. Berkeley, CA 94709",
+//     photo_url: "images/waffles.jpg"
+//   }
+// ]
 
 db.Donor
   .remove({})
