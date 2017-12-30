@@ -6,7 +6,7 @@ class UserDonations extends Component {
 
   state={
     user:null,
-    donations: null
+    donations: []
   }
 
   componentDidMount() {
@@ -24,8 +24,18 @@ class UserDonations extends Component {
   }
 
   render(){
+    const userDonations = this.state.donations.map(donation =>{
+      return (
+        <div className="row">
+          <h4 className="col-12">{donation.donation_description}</h4>
+          <p className="col-12">{donation.date}</p>
+        </div>
+      )
+    })
     return (
-      <div>test</div>
+      <div>
+        {userDonations}
+      </div>
     )
   }
 }
