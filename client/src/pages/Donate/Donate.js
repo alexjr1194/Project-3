@@ -40,8 +40,8 @@ componentDidMount () {
    console.log("test",donation);
    axios.post('/api/donation', donation)
     .then((response) => {
-      console.log(response);
-      this.setState({donationId:response.data._id})
+      console.log("donation", response.data._id);
+      this.setState({donationId:response.data._id});
     })
     .then((response) => {
       this.props.history.push(`/user/${this.state.user}/reciept/${this.state.donationId}`);

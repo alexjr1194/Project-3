@@ -10,7 +10,8 @@ const donationSchema = new Schema({
   shelf_life: {type: String, required: true},
   ingredients: {type: String, required: true},
   location: {type: String, required: true},
-  photo_url: {type: String, required: true}
+  photo_url: {type: String, required: true},
+  status:{type: String, default: "active"}
 })
 
 const Donation = mongoose.model("Donation", donationSchema);

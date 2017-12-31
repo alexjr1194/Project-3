@@ -45,7 +45,7 @@ class Reciept extends Component {
         </div>
         <div className="row justify-content-center">
           <Link to={"/user/" + user} className="btn btn-lg btn-success">Home</Link>
-          <Link to={"user/" +user+ "/donations/"+donationId} className="btn btn-lg btn-danger">Track Donation</Link>
+          <Link to={"/user/" +user+ "/donations/activedonation/"+donationId} className="btn btn-lg btn-danger">Track Donation</Link>
           <Link to={"/user/"+user+"/donations/userdonations"} className="btn btn-lg btn-success">View All Donations</Link>
         </div>
       </div>

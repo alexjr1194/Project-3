@@ -19,8 +19,9 @@ module.exports = {
     db.Donation
       .create(req.body)
       .then(dbDonation =>{
+        res.json(dbDonation);
         return db.Donor.findOneAndUpdate({_id: dbDonation._creator}, {$push: {donations:dbDonation._id}},{new:true});
       })
-      .then(dbDonation => res.json(dbDonation));
+      //.then(dbDonation => res.json(dbDonation));
   }
 }

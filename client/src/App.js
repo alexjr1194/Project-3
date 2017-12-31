@@ -5,6 +5,7 @@ import User from './pages/User';
 import Reciept from './pages/Reciept';
 import Donate from './pages/Donate';
 import UserDonations from './pages/UserDonations';
+import ActiveDonation from './pages/ActiveDonation';
 
 class App extends Component {
   render () {
@@ -17,6 +18,7 @@ class App extends Component {
             <Route exact path='/user/:id/donations' component={Donate}/>
             <Route exact path='/user/:id/reciept/:number' component={Reciept}/>
             <Route exact path='/user/:id/donations/userdonations' component={UserDonations}/>
+            <Route exact path='/user/:id/donations/activedonation/:donationid' component={ActiveDonation}/>
           </Switch>
         </div>
       </Router>

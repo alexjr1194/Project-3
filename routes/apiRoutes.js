@@ -6,7 +6,7 @@ const donationController = require("../controllers/donationController.js");
 router.route("/donor/:donor")
   .get(donorController.findDonor)
   .post(donorController.createDonor)
-  
+
 router.route("/donor/populate/:donor")
   .get(donorController.populatedDonor)
 
@@ -20,6 +20,6 @@ router.route("/donation")
 router.route("/donation/:donor")
   .get(donationController.findDonations)
 
-router.route("/donation/:id")
+router.route("/donation/activedonation/:id")
   .get(donationController.findOneDonation)
 module.exports = router;
