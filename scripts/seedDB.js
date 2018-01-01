@@ -57,6 +57,32 @@ const donorSeed = [
   },
 ];
 
+const donationSeed = [
+  {
+    today_date: "01/01/18",
+    name: "meatballs and spaghetti",
+    quantity: "2-lb",
+    prepared_on: "01/01/18",
+    shelf_life: "2-days",
+    ingredients: "beef, wheat flour, peanuts, tomatoes...",
+    locations: "Berkeley, CA",
+    should_know: "Contains peanuts",
+    photo: "Sample Photo1"
+  },
+  {
+    today_date: "01/01/18",
+    name: "Pasta Salad",
+    quantity: "2-lb",
+    prepared_on: "01/01/18",
+    shelf_life: "2-days",
+    ingredients: "wheat flour, chicken, beets, onions, seasme seeds, peanuts, tomatoes...",
+    locations: "Daly City, CA",
+    should_know: "Contains peanuts & Seasme Seeds",
+    photo: "Sample Photo2"
+  },
+];
+
+
 db.Donor
   .remove({})
   .then(() => db.Donor.collection.insertMany(donorSeed))
@@ -73,6 +99,18 @@ db.Donor
 db.Charity
   .remove({})
   .then(() => db.Charity.collection.insertMany(charitySeed))
+  .then(data => {
+    console.log(data.insertedIds.length + " records inserted");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+
+db.Donation
+  .remove({})
+  .then(() => db.Donation.collection.insertMany(donationSeed))
   .then(data => {
     console.log(data.insertedIds.length + " records inserted");
     process.exit(0);

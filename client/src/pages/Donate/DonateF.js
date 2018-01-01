@@ -58,8 +58,8 @@ class DonateForm extends React.Component {
           Date:
           <div>
             <DatePicker
-              onChange={this.onChange}
-              value={this.state.todayDate}
+              selected={this.state.todayDate}
+              onChange={this.handleDateChange}
             />
           </div>
         </label>
@@ -92,9 +92,12 @@ class DonateForm extends React.Component {
           Time/Date Food Prepared:
           <input
           name="preparedOn"
-          type="text"
-          value={this.state.preparedOn}
-          onChange={this.handleChange} />
+          <div>
+            <DatePicker
+              selected={this.state.todayDate}
+              onChange={this.handleDateChange}
+            />
+          </div>
         </label>
         
         <br/>
