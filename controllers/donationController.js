@@ -15,6 +15,16 @@ module.exports = {
       .catch(err => res.status(422).json(err))
   },
 
+  findOneAndUpdate: function(req, res) {
+    db.Donation
+      .findOneAndUpdate({_id: req.params.id}, {$set: {status: "donated"}}, {new: true})
+      .then(dbDonation =>{
+        console.log(dbDonation);
+        res.json(dbDonation)
+      })
+      .catch(err => res.status(422).json(err))
+  },
+
   createDonation: function(req, res) {
     db.Donation
       .create(req.body)
@@ -23,5 +33,15 @@ module.exports = {
         return db.Donor.findOneAndUpdate({_id: dbDonation._creator}, {$push: {donations:dbDonation._id}},{new:true});
       })
       //.then(dbDonation => res.json(dbDonation));
+  },
+
+  findActiveDonations: function(req, res) {
+    console.log(req);
+    db.Donation
+      .find({status:"active"})
+      .then(dbDonation => {
+        res.json(dbDonation)
+      })
+      .catch(err => res.status(422).json(err))
   }
 }
