@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import User from './pages/User';
+import SignUp from './pages/SignUp'
 import Reciept from './pages/Reciept';
 import Donate from './pages/Donate';
 import UserDonations from './pages/UserDonations';
@@ -19,6 +20,9 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/user/:id' component={User}/>
+
+            <Route exact path='/signup' component={SignUp}/>
+
             <Route exact path='/user/:id/donations' component={Donate}/>
             <Route exact path='/user/:id/reciept/:number' component={Reciept}/>
             <Route exact path='/user/:id/donations/userdonations' component={UserDonations}/>
@@ -26,6 +30,7 @@ class App extends Component {
             <Route exact path='/charity/:id' component={Charity}/>
             <Route exact path='/charity/:id/availabledonations' component={AvailableDonations}/>
             <Route exact path='/charity/:id/activedonation/:donation' component={CharityActive} />
+
           </Switch>
         </div>
       </Router>
