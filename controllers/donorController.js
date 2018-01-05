@@ -16,7 +16,7 @@ module.exports = {
 
   populatedDonor: function(req, res) {
     db.Donor
-      .find({})
+      .find({"email": req.params.donor})
       .populate('donations')
       .then(dbDonor => {
         console.log(dbDonor);

@@ -6,11 +6,11 @@ const donationController = require("../controllers/donationController.js");
 router.route("/donor/:donor")
   .get(donorController.findDonor)
   .post(donorController.createDonor)
-  
+
 router.route("/donor/populate/:donor")
   .get(donorController.populatedDonor)
 
-router.route("/charity")
+router.route("/charity/:id")
   .get(charityController.findCharity)
   .post(charityController.createCharity)
 
@@ -20,6 +20,11 @@ router.route("/donation")
 router.route("/donation/:donor")
   .get(donationController.findDonations)
 
-router.route("/donation/:id")
+router.route("/donation/:charity/available")
+  .get(donationController.findActiveDonations)
+
+router.route("/donation/activedonation/:id")
   .get(donationController.findOneDonation)
+  .put(donationController.findOneAndUpdate)
+
 module.exports = router;
