@@ -49,22 +49,48 @@ class Home extends Component {
             <div className='col-sm-5'></div>
 
             <div className='col-sm-4'>
-              <form>
-                <h1 className='jumbotron'>LogIn: </h1>
-                <label for='username'>Username: </label>
-                <Input
-                  name='username'
-                  placeholder='Username (Required)'
-                />
-                <label for='password'>Password: </label>
-                <Input
-                  name='password'
-                  placeholder='Password (Required)'
-                />
+              <div className='row'>
 
-                <FormBtn>Sign In</FormBtn>
+                <div className='col-sm-6'>
+                  <form method='post' action='/signup'>
+                    <h1>Sign-Up: </h1>
+                    <label for='name'>First Name: </label>
+                    <Input
+                      name='fName'
+                      placeholder=' First Name(Required)'
+                    />
+                    <label for='lName'>Last Name:</label>
+                    <Input
+                      name='lName'
+                      placeholder='Last Name(Required)'
+                    />
+                    <label for=''></label>
+                    <Input
+                      name=''
+                      placeholder=''
+                    />
+                  </form>
+                </div>
 
-              </form>
+                <div className='col-sm-6'>
+                  <form method='post' action='/signin'>
+                    <h1>LogIn: </h1>
+                    <label for='username'>Username: </label>
+                    <Input
+                      name='username'
+                      placeholder='Username (Required)'
+                    />
+                    <label for='password'>Password: </label>
+                    <Input
+                      name='password'
+                      placeholder='Password (Required)'
+                    />
+
+                    <FormBtn>Sign In</FormBtn>
+
+                  </form>
+                </div>
+              </div>
             </div>
 
           </div>

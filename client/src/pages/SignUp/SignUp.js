@@ -24,7 +24,7 @@ class SignUp extends Component {
         </div>
         <div className='row'>
           <div className='col-sm-12'>
-            <form>
+            <form method='post' action='/signup'>
               <label for='firstName'>First Name: </label>
               <Input
                 name='firstName'
