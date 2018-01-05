@@ -2,17 +2,6 @@ import React, {Component} from 'react';
 import { Input, FormBtn } from "../../components/Form";
 
 class SignUp extends Component {
-  state = {
-    email:'',
-    password: '',
-    firstName: '',
-    lastName:'',
-    gender: '',
-    idNum: '',
-    location: '',
-    phonenumber: '',
-    email: ''
-  };
 
   render () {
     return (
