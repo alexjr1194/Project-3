@@ -7,7 +7,7 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 
-class Donate extends React.Component { 
+class Donate extends React.Component {
     state = {
       todayDate:moment(),
       name: '',
@@ -20,7 +20,7 @@ class Donate extends React.Component {
       shouldKnow:'',
       photo:''
     };
-  
+
   componentDidMount () {
     this.getUser();
   }
@@ -38,48 +38,51 @@ class Donate extends React.Component {
      .catch(err => console.log(err));
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     const target = event.target;
-    const value = target.type === 'checkbox' ? taget.checked : taget.va;ue;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
     this.setState({
       [name]: value
       // value: event.target.value});
+    })
   }
 
-  handleDateChange(date) {
+  handleDateChange = (date) => {
     this.setState({
       startDate: date
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     alert('We thank you for your support. Your donation has been submitted!');
     event.preventDefault();
   }
 
-  submitForm = () => {
-   const creator = this.state.userId;
-   let donation = {_creator: creator, ...this.state.donation}
-   console.log("test",donation);
-   axios.post('/api/donation', donation)
-    .then((response) => {
-      console.log("donation", response.data._id);
-      this.setState({donationId:response.data._id});
-    })
-    .then((response) => {
-      this.props.history.push(`/user/${this.state.user}/reciept/${this.state.donationId}`);
-    })
-    .catch((err)=>console.log(err));
+  submitForm = (event) => {
+    event.preventDefault();
+    //alert('We thank you for your support. Your donation has been submitted!');
+    const creator = this.state.userId;
+    let donation = {_creator: creator, ...this.state.donation}
+    console.log("test",donation);
+    axios.post('/api/donation', donation)
+      .then((response) => {
+        console.log("donation", response.data._id);
+        this.setState({donationId:response.data._id});
+      })
+      .then((response) => {
+        this.props.history.push(`/user/${this.state.user}/reciept/${this.state.donationId}`);
+      })
+      .catch((err)=>console.log(err));
   }
 
   render() {
     return (
-      
+
       <div>
         <h1>{this.state.user} make a donation!</h1>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.submitForm}>
 
           <label>
             Date:
@@ -117,14 +120,14 @@ class Donate extends React.Component {
 
           <label>
             Time Food Prepared:
-            <input
-            name="preparedOn"
+            <input name="preparedOn" />
             <div>
               <DatePicker
                 selected={this.state.todayDate}
                 onChange={this.handleDateChange}
               />
             </div>
+
           </label>
 
           <br/>
@@ -137,18 +140,6 @@ class Donate extends React.Component {
             value={this.state.shelfLife}
             onChange={this.handleChange} />
           </label>
-          // no break here. It specifies units for value above
-          // <label>
-          //   <select
-          //   name="shelfLifeUnit"
-          //   value={this.state.shelfLifeUnit}
-          //   onChange={this.handleChange}>
-          //     <option value="minutes">Minutes</option>
-          //     <option value="hours">Hours</option>
-          //     <option value="days">Days</option>
-          //     <option value="weeks">Weeks</option>
-          //   </select>
-          // </label>
 
           <br/>
 
@@ -196,7 +187,7 @@ class Donate extends React.Component {
 
           <br/>
 
-          <input type="submit" value="Submit" onClick={this.submitForm}/>
+          <input type="submit" value="Submit"/>
         </form>
       </div>
     );
@@ -204,4 +195,3 @@ class Donate extends React.Component {
 }
 
 export default Donate;
-
