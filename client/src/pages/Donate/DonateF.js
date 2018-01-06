@@ -89,7 +89,7 @@ class DonateForm extends React.Component {
         <br/>
 
         <label>
-          Time/Date Food Prepared:
+          Time Food Prepared:
           <input
           name="preparedOn"
           <div>
@@ -103,7 +103,7 @@ class DonateForm extends React.Component {
         <br/>
 
         <label>
-          Shelf Life:
+          Shelf Life! (Please specify units):
           <input
           name="shelfLife"
           type="text"
@@ -111,17 +111,17 @@ class DonateForm extends React.Component {
           onChange={this.handleChange} />
         </label>
         // no break here. It specifies units for value above
-        <label>
-          <select
-          name="shelfLifeUnit"
-          value={this.state.shelfLifeUnit}
-          onChange={this.handleChange}>
-            <option value="minutes">Minutes</option>
-            <option value="hours">Hours</option>
-            <option value="days">Days</option>
-            <option value="weeks">Weeks</option>
-          </select>
-        </label>
+        // <label>
+        //   <select
+        //   name="shelfLifeUnit"
+        //   value={this.state.shelfLifeUnit}
+        //   onChange={this.handleChange}>
+        //     <option value="minutes">Minutes</option>
+        //     <option value="hours">Hours</option>
+        //     <option value="days">Days</option>
+        //     <option value="weeks">Weeks</option>
+        //   </select>
+        // </label>
         
         <br/>
 
@@ -159,7 +159,7 @@ class DonateForm extends React.Component {
         <br/>
 
         <label>
-          Add Photo:
+          Photo Link:
           <input
           name="photo"
           type="text"
