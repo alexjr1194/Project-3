@@ -9,16 +9,22 @@ import axios from 'axios';
 
 class Donate extends React.Component {
     state = {
-      todayDate:moment(),
-      name: '',
-      quantity:'',
-      preparedOn:moment(),
-      shelfLife:'',
-      shelfLifeUnit:'',
-      ingredients:'',
-      location:'',
-      shouldKnow:'',
-      photo:''
+      user: null,
+      userId:null,
+      donation:{
+        todayDate:moment(),
+        name: '',
+        quantity:'',
+        preparedOn:moment(),
+        preparedTime: '',
+        shelfLife:'',
+        shelfLifeUnit:'',
+        ingredients:'',
+        location:'',
+        shouldKnow:'',
+        photo:''
+      },
+      donationId:null,
     };
 
   componentDidMount () {
@@ -50,8 +56,10 @@ class Donate extends React.Component {
   }
 
   handleDateChange = (date) => {
+    let donation = this.state.donation;
+    donation.todayDate = date;
     this.setState({
-      startDate: date
+      donation: donation
     });
   }
 
