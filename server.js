@@ -4,8 +4,13 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const apiRoutes = require("./routes/apiRoutes");
 
+const http = require("http");
+
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+const server = http.createServer(app);
+const io = require('socket.io')(server);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -29,8 +34,21 @@ app.get(function(req, res) {
   res.sendFile(path.join(__dirname, "./client/public/index.html"));
 })
 
+io.on("connection", socket => {
+  console.log("New client connected");
+  socket.on('join', data => {
+    console.log(data);
+    socket.emit("test", {'message': 'Hello Socket'})
+  })
+  socket.on('chat', msg => {
+    io.emit('chat', msg)
+    console.log(data)
+  });
+  socket.on("disconnect", () => console.log("Client disconnected"));
+
+});
 
 
-app.listen(PORT, function(){
+server.listen(PORT, function(){
   console.log(`server listening on port ${PORT}`);
 });
