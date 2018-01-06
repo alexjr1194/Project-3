@@ -11,20 +11,19 @@ class Donate extends React.Component {
     state = {
       user: null,
       userId:null,
-      donation:{
-        todayDate:moment(),
-        name: '',
-        quantity:'',
-        preparedOn:moment(),
-        preparedTime: '',
-        shelfLife:'',
-        shelfLifeUnit:'',
-        ingredients:'',
-        location:'',
-        shouldKnow:'',
-        photo:''
-      },
+      donation:{},
       donationId:null,
+      todayDate:moment(),
+      name: '',
+      quantity:'',
+      preparedTime:'',
+      preparedOn: moment(),
+      shelfLife:'',
+      shelfLifeUnit:'',
+      ingredients:'',
+      location:'',
+      shouldKnow:'',
+      photo:''
     };
 
   componentDidMount () {
@@ -45,22 +44,23 @@ class Donate extends React.Component {
   }
 
   handleChange = (event) => {
+    const state = this.state;
+
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-
-    this.setState({
-      [name]: value
-      // value: event.target.value});
-    })
+    state.donation[name] = value;
+    this.setState(state.donation);
   }
 
   handleDateChange = (date) => {
-    let donation = this.state.donation;
-    donation.todayDate = date;
     this.setState({
-      donation: donation
+      todayDate: date
     });
+  }
+
+  handleMadeDate = (date) => {
+    this.setState({preparedOn: date})
   }
 
   handleSubmit = (event) => {
@@ -72,7 +72,9 @@ class Donate extends React.Component {
     event.preventDefault();
     //alert('We thank you for your support. Your donation has been submitted!');
     const creator = this.state.userId;
-    let donation = {_creator: creator, ...this.state.donation}
+    const todayDate = this.state.todayDate;
+    const preparedOn = this.state.preparedOn;
+    let donation = {_creator: creator, todayDate:todayDate, preparedOn: preparedOn, ...this.state.donation}
     console.log("test",donation);
     axios.post('/api/donation', donation)
       .then((response) => {
@@ -128,11 +130,14 @@ class Donate extends React.Component {
 
           <label>
             Time Food Prepared:
-            <input name="preparedOn" />
+            <input
+              name="preparedTime"
+              value={this.state.preparedOn}
+              onChange={this.handleChange} />
             <div>
               <DatePicker
                 selected={this.state.todayDate}
-                onChange={this.handleDateChange}
+                onChange={this.handleMadeDate}
               />
             </div>
 

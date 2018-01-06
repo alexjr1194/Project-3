@@ -13,7 +13,7 @@ const donationSchema = new Schema({
   ingredients: {type: String, required: true},
   location: {type: String, required: true},
   photo: {type: String, required: true},
-  shouldKnow: {type: String}
+  shouldKnow: {type: String},
   status:{type: String, default: "active"}
 })
 
