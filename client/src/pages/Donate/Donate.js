@@ -1,15 +1,14 @@
+
 import React, {Component} from 'react';
 import Nav from '../../components/Nav';
 import { Input, FormBtn } from "../../components/Form";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
+import axios from 'axios';
 
-
-class DonateForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+class Donate extends React.Component { 
+    state = {
       todayDate:moment(),
       name: '',
       quantity:'',
@@ -21,10 +20,22 @@ class DonateForm extends React.Component {
       shouldKnow:'',
       photo:''
     };
+  
+  componentDidMount () {
+    this.getUser();
+  }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleDateChange = this.handleDateChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  getUser = () =>{
+   const user=this.props.match.params.id;
+   console.log(user);
+   this.setState({user: user}, ()=>console.log(this.state.user));
+   axios.get(`/api/donor/${user}`)
+     .then((response) => {
+       console.log(response)
+       const userId = response.data[0]._id;
+       this.setState({userId: userId}, ()=>console.log(this.state.userId));
+     })
+     .catch(err => console.log(err));
   }
 
   handleChange(event) {
@@ -48,129 +59,149 @@ class DonateForm extends React.Component {
     event.preventDefault();
   }
 
-
+  submitForm = () => {
+   const creator = this.state.userId;
+   let donation = {_creator: creator, ...this.state.donation}
+   console.log("test",donation);
+   axios.post('/api/donation', donation)
+    .then((response) => {
+      console.log("donation", response.data._id);
+      this.setState({donationId:response.data._id});
+    })
+    .then((response) => {
+      this.props.history.push(`/user/${this.state.user}/reciept/${this.state.donationId}`);
+    })
+    .catch((err)=>console.log(err));
+  }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        
-        <label>
-          Date:
-          <div>
-            <DatePicker
-              selected={this.state.todayDate}
-              onChange={this.handleDateChange}
-            />
-          </div>
-        </label>
+      
+      <div>
+        <h1>{this.state.user} make a donation!</h1>
+        <form onSubmit={this.handleSubmit}>
 
-        <br/>
+          <label>
+            Date:
+            <div>
+              <DatePicker
+                selected={this.state.todayDate}
+                onChange={this.handleDateChange}
+              />
+            </div>
+          </label>
 
-        <label>
-          What are you donating?:
-          <input
-          name="name"
-          type="text"
-          value={this.state.name}
-          onChange={this.handleChange} />
-        </label>
+          <br/>
 
-        <br/>
+          <label>
+            What are you donating?:
+            <input
+            name="name"
+            type="text"
+            value={this.state.name}
+            onChange={this.handleChange} />
+          </label>
 
-        <label>
-          Quantity!(please specify units):
-          <input
-          name="quantity"
-          type="text"
-          value={this.state.quantity}
-          onChange={this.handleChange} />
-        </label>
-        
-        <br/>
+          <br/>
 
-        <label>
-          Time Food Prepared:
-          <input
-          name="preparedOn"
-          <div>
-            <DatePicker
-              selected={this.state.todayDate}
-              onChange={this.handleDateChange}
-            />
-          </div>
-        </label>
-        
-        <br/>
+          <label>
+            Quantity!(please specify units):
+            <input
+            name="quantity"
+            type="text"
+            value={this.state.quantity}
+            onChange={this.handleChange} />
+          </label>
 
-        <label>
-          Shelf Life! (Please specify units):
-          <input
-          name="shelfLife"
-          type="text"
-          value={this.state.shelfLife}
-          onChange={this.handleChange} />
-        </label>
-        // no break here. It specifies units for value above
-        // <label>
-        //   <select
-        //   name="shelfLifeUnit"
-        //   value={this.state.shelfLifeUnit}
-        //   onChange={this.handleChange}>
-        //     <option value="minutes">Minutes</option>
-        //     <option value="hours">Hours</option>
-        //     <option value="days">Days</option>
-        //     <option value="weeks">Weeks</option>
-        //   </select>
-        // </label>
-        
-        <br/>
+          <br/>
 
-        <label>
-          Ingredients:
-          <input
-          name="ingredients"
-          type="text"
-          value={this.state.ingredients}
-          onChange={this.handleChange} />
-        </label>
+          <label>
+            Time Food Prepared:
+            <input
+            name="preparedOn"
+            <div>
+              <DatePicker
+                selected={this.state.todayDate}
+                onChange={this.handleDateChange}
+              />
+            </div>
+          </label>
 
-        <br/>
+          <br/>
 
-        <label>
-          Location:
-          <input
-          name="location"
-          type="text"
-          value={this.state.location}
-          onChange={this.handleChange} />
-        </label>
+          <label>
+            Shelf Life! (Please specify units):
+            <input
+            name="shelfLife"
+            type="text"
+            value={this.state.shelfLife}
+            onChange={this.handleChange} />
+          </label>
+          // no break here. It specifies units for value above
+          // <label>
+          //   <select
+          //   name="shelfLifeUnit"
+          //   value={this.state.shelfLifeUnit}
+          //   onChange={this.handleChange}>
+          //     <option value="minutes">Minutes</option>
+          //     <option value="hours">Hours</option>
+          //     <option value="days">Days</option>
+          //     <option value="weeks">Weeks</option>
+          //   </select>
+          // </label>
 
-        <br/>
+          <br/>
 
-        <label>
-          Anything we should know:
-          <input
-           name="shouldKnow"
-           type="text"
-           value={this.state.shouldKnow}
-           onChange={this.handleChange} />
-        </label>
+          <label>
+            Ingredients:
+            <input
+            name="ingredients"
+            type="text"
+            value={this.state.ingredients}
+            onChange={this.handleChange} />
+          </label>
 
-        <br/>
+          <br/>
 
-        <label>
-          Photo Link:
-          <input
-          name="photo"
-          type="text"
-          value={this.state.photo}
-          onChange={this.handleChange} />
-        </label>
+          <label>
+            Location:
+            <input
+            name="location"
+            type="text"
+            value={this.state.location}
+            onChange={this.handleChange} />
+          </label>
 
-        <br/>
+          <br/>
 
-        <input type="submit" value="Submit" />
-      </form>
+          <label>
+            Anything we should know:
+            <input
+             name="shouldKnow"
+             type="text"
+             value={this.state.shouldKnow}
+             onChange={this.handleChange} />
+          </label>
+
+          <br/>
+
+          <label>
+            Photo Link:
+            <input
+            name="photo"
+            type="text"
+            value={this.state.photo}
+            onChange={this.handleChange} />
+          </label>
+
+          <br/>
+
+          <input type="submit" value="Submit" onClick={this.submitForm}/>
+        </form>
+      </div>
     );
   }
 }
+
+export default Donate;
+

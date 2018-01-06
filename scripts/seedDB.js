@@ -41,7 +41,7 @@ const donorSeed = [
     zip:"94709",
     state: "CA",
     phone_number: "510-555-5555",
-    email: "test_donor@testdonor.com",
+    email: "testdonor@testdonor.com",
     status: "active"
   },
   {
@@ -52,35 +52,36 @@ const donorSeed = [
     zip:"94709",
     state: "CA",
     phone_number: "510-555-2323",
-    email: "second_donor@testdonor.com",
+    email: "seconddonor@testdonor.com",
     status: "active"
   },
 ];
 
+
 const donationSeed = [
   {
-    today_date: "01/01/18",
-    name: "meatballs and spaghetti",
-    quantity: "2-lb",
-    prepared_on: "01/01/18",
-    shelf_life: "2-days",
-    ingredients: "beef, wheat flour, peanuts, tomatoes...",
-    locations: "Berkeley, CA",
-    should_know: "Contains peanuts",
-    photo: "Sample Photo1"
+    _creator: {type: Schema.Types.ObjectId, ref: "Donation"}
+    date: "12/21/2017",
+    donation_description: "Ham and Eggs",
+    quantity: "3",
+    prepared_time: "01:00 P.M.",
+    shelf_life: "2hrs",
+    ingredients: "ham and eggs",
+    location: "2141 Eunice St. Berkeley, CA 94709",
+    photo_url: "images/hamandeggs.jpg"
   },
   {
-    today_date: "01/01/18",
-    name: "Pasta Salad",
-    quantity: "2-lb",
-    prepared_on: "01/01/18",
-    shelf_life: "2-days",
-    ingredients: "wheat flour, chicken, beets, onions, seasme seeds, peanuts, tomatoes...",
-    locations: "Daly City, CA",
-    should_know: "Contains peanuts & Seasme Seeds",
-    photo: "Sample Photo2"
-  },
-];
+    _creator: {type: Schema.Types.ObjectId, ref: "Donation"}
+    date: "12/21/2017",
+    donation_description: "waffles",
+    quantity: "2",
+    prepared_time: "02:00 P.M.",
+    shelf_life: "2hrs",
+    ingredients: "waffles and syrup",
+    location: "2141 Eunice St. Berkeley, CA 94709",
+    photo_url: "images/waffles.jpg"
+  }
+]
 
 
 db.Donor

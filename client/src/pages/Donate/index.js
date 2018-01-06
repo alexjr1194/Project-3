@@ -1,1 +1,3 @@
-export { default } from './Donate.js'
+
+export {default} from './Donate.js';
+
