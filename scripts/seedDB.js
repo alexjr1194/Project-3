@@ -57,30 +57,32 @@ const donorSeed = [
   },
 ];
 
-// const donationSeed = [
-//   {
-//     _creator: {type: Schema.Types.ObjectId, ref: "Donation"}
-//     date: "12/21/2017",
-//     donation_description: "Ham and Eggs",
-//     quantity: "3",
-//     prepared_time: "01:00 P.M.",
-//     shelf_life: "2hrs",
-//     ingredients: "ham and eggs",
-//     location: "2141 Eunice St. Berkeley, CA 94709",
-//     photo_url: "images/hamandeggs.jpg"
-//   },
-//   {
-//     _creator: {type: Schema.Types.ObjectId, ref: "Donation"}
-//     date: "12/21/2017",
-//     donation_description: "waffles",
-//     quantity: "2",
-//     prepared_time: "02:00 P.M.",
-//     shelf_life: "2hrs",
-//     ingredients: "waffles and syrup",
-//     location: "2141 Eunice St. Berkeley, CA 94709",
-//     photo_url: "images/waffles.jpg"
-//   }
-// ]
+
+const donationSeed = [
+  {
+    _creator: {type: Schema.Types.ObjectId, ref: "Donation"}
+    date: "12/21/2017",
+    donation_description: "Ham and Eggs",
+    quantity: "3",
+    prepared_time: "01:00 P.M.",
+    shelf_life: "2hrs",
+    ingredients: "ham and eggs",
+    location: "2141 Eunice St. Berkeley, CA 94709",
+    photo_url: "images/hamandeggs.jpg"
+  },
+  {
+    _creator: {type: Schema.Types.ObjectId, ref: "Donation"}
+    date: "12/21/2017",
+    donation_description: "waffles",
+    quantity: "2",
+    prepared_time: "02:00 P.M.",
+    shelf_life: "2hrs",
+    ingredients: "waffles and syrup",
+    location: "2141 Eunice St. Berkeley, CA 94709",
+    photo_url: "images/waffles.jpg"
+  }
+]
+
 
 db.Donor
   .remove({})
@@ -98,6 +100,18 @@ db.Donor
 db.Charity
   .remove({})
   .then(() => db.Charity.collection.insertMany(charitySeed))
+  .then(data => {
+    console.log(data.insertedIds.length + " records inserted");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+
+db.Donation
+  .remove({})
+  .then(() => db.Donation.collection.insertMany(donationSeed))
   .then(data => {
     console.log(data.insertedIds.length + " records inserted");
     process.exit(0);

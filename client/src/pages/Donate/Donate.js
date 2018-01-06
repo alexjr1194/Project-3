@@ -1,21 +1,31 @@
+
 import React, {Component} from 'react';
-import DonationForm from '../../components/DonationForm/DonationForm.js'
+import Nav from '../../components/Nav';
+import { Input, FormBtn } from "../../components/Form";
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 
-class Donate extends Component {
-
-  state = {
-    user: null,
-    userId:null,
-    donation:{},
-    donationId:null
+class Donate extends React.Component { 
+    state = {
+      todayDate:moment(),
+      name: '',
+      quantity:'',
+      preparedOn:moment(),
+      shelfLife:'',
+      shelfLifeUnit:'',
+      ingredients:'',
+      location:'',
+      shouldKnow:'',
+      photo:''
+    };
+  
+  componentDidMount () {
+    this.getUser();
   }
 
-componentDidMount () {
-  this.getUser();
-}
-
- getUser = () =>{
+  getUser = () =>{
    const user=this.props.match.params.id;
    console.log(user);
    this.setState({user: user}, ()=>console.log(this.state.user));
@@ -26,15 +36,30 @@ componentDidMount () {
        this.setState({userId: userId}, ()=>console.log(this.state.userId));
      })
      .catch(err => console.log(err));
- }
+  }
 
- getDonation = (event) => {
-   const state = this.state;
-   state.donation[event.target.name] = event.target.value;
-   this.setState(state.donation);
- }
+  handleChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? taget.checked : taget.va;ue;
+    const name = target.name;
 
- submitForm = () => {
+    this.setState({
+      [name]: value
+      // value: event.target.value});
+  }
+
+  handleDateChange(date) {
+    this.setState({
+      startDate: date
+    });
+  }
+
+  handleSubmit(event) {
+    alert('We thank you for your support. Your donation has been submitted!');
+    event.preventDefault();
+  }
+
+  submitForm = () => {
    const creator = this.state.userId;
    let donation = {_creator: creator, ...this.state.donation}
    console.log("test",donation);
@@ -47,19 +72,136 @@ componentDidMount () {
       this.props.history.push(`/user/${this.state.user}/reciept/${this.state.donationId}`);
     })
     .catch((err)=>console.log(err));
- }
+  }
 
-  render(){
+  render() {
     return (
+      
       <div>
         <h1>{this.state.user} make a donation!</h1>
-        <div>
-          <DonationForm getDonation={this.getDonation} submitForm={this.submitForm}/>
-        </div>
-        <p>{this.state.donation.donation_description}</p>
+        <form onSubmit={this.handleSubmit}>
+
+          <label>
+            Date:
+            <div>
+              <DatePicker
+                selected={this.state.todayDate}
+                onChange={this.handleDateChange}
+              />
+            </div>
+          </label>
+
+          <br/>
+
+          <label>
+            What are you donating?:
+            <input
+            name="name"
+            type="text"
+            value={this.state.name}
+            onChange={this.handleChange} />
+          </label>
+
+          <br/>
+
+          <label>
+            Quantity!(please specify units):
+            <input
+            name="quantity"
+            type="text"
+            value={this.state.quantity}
+            onChange={this.handleChange} />
+          </label>
+
+          <br/>
+
+          <label>
+            Time Food Prepared:
+            <input
+            name="preparedOn"
+            <div>
+              <DatePicker
+                selected={this.state.todayDate}
+                onChange={this.handleDateChange}
+              />
+            </div>
+          </label>
+
+          <br/>
+
+          <label>
+            Shelf Life! (Please specify units):
+            <input
+            name="shelfLife"
+            type="text"
+            value={this.state.shelfLife}
+            onChange={this.handleChange} />
+          </label>
+          // no break here. It specifies units for value above
+          // <label>
+          //   <select
+          //   name="shelfLifeUnit"
+          //   value={this.state.shelfLifeUnit}
+          //   onChange={this.handleChange}>
+          //     <option value="minutes">Minutes</option>
+          //     <option value="hours">Hours</option>
+          //     <option value="days">Days</option>
+          //     <option value="weeks">Weeks</option>
+          //   </select>
+          // </label>
+
+          <br/>
+
+          <label>
+            Ingredients:
+            <input
+            name="ingredients"
+            type="text"
+            value={this.state.ingredients}
+            onChange={this.handleChange} />
+          </label>
+
+          <br/>
+
+          <label>
+            Location:
+            <input
+            name="location"
+            type="text"
+            value={this.state.location}
+            onChange={this.handleChange} />
+          </label>
+
+          <br/>
+
+          <label>
+            Anything we should know:
+            <input
+             name="shouldKnow"
+             type="text"
+             value={this.state.shouldKnow}
+             onChange={this.handleChange} />
+          </label>
+
+          <br/>
+
+          <label>
+            Photo Link:
+            <input
+            name="photo"
+            type="text"
+            value={this.state.photo}
+            onChange={this.handleChange} />
+          </label>
+
+          <br/>
+
+          <input type="submit" value="Submit" onClick={this.submitForm}/>
+        </form>
       </div>
-    )
+    );
   }
 }
 
 export default Donate;
+

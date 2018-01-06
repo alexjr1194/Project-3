@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const donationSchema = new Schema({
+
   _creator: {type: Schema.Types.ObjectId, ref: "Donor"},
   date: {type: Date, default: Date.now},
   donation_description: {type: String, required: true},
@@ -17,3 +18,4 @@ const donationSchema = new Schema({
 const Donation = mongoose.model("Donation", donationSchema);
 
 module.exports = Donation;
+
