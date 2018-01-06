@@ -1,57 +1,23 @@
-import React, {Component} from 'react';
-import axios from 'axios';
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react';
 
-class View extends Component {
+class donationsMade extends Component {
   state = {
-    donationNumber: null,
-    user: null,
-    donationId: null
+    donations: 'donations'
   }
-
-  componentDidMount() {
-    this.getParams();
-  }
-
-  getParams() {
-    const user = this.props.match.params.id;
-    const donationId = this.props.match.params.number;
-    this.setState({user: user, donationId: donationId});
-    this.getDonationNumber();
-  }
-
-  getDonationNumber() {
-    let user = this.props.match.params.id;
-    axios.get(`/api/donor/populate/${user}`)
-      .then((response) => {
-        console.log(response.data[0])
-        const donationNumber = response.data[0].donations.length;
-        console.log("populated donor :", donationNumber);
-        this.setState({donationNumber: donationNumber}, ()=>console.log(this.state.donationNumber, this.state.user, this.state.donationId));
-      })
-      .catch(err => console.log(err));
-  }
-
-  render() {
-    const user = this.state.user;
-    const donationId = this.state.donationId;
+  render () {
     return (
-      <div className="container col-12">
-        <div className="row justify-content-center">
-          <h2 id="thanks">Thank You For All Your Donations!</h2>
-          <h1>Please Find Your Donation History below</h1>
-        </div>
-        <div className="row justify-content-center">
-          <h4>for donation number {this.state.donationNumber} </h4>
-        </div>
-        <div className="row justify-content-center">
-          <Link to={"/user/"+user} className="btn btn-lg btn-success">Home</Link>
-          <Link to={"/donations/user/"+user+"/"+donationId"} className="btn btn-lg btn-danger">Track Donation</Link>
-          <Link to={"/donations/user/"+user+"/"} className="btn btn-lg btn-success">View All Donations</Link>
+      <div>
+        <Nav />
+        <div className='container'>
+          <div className='row'>
+            <div className='col-sm-12'>
+              <h1>{this.state.donations}</h1>
+            </div>
+          </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Reciept;
+export default donationsMade;

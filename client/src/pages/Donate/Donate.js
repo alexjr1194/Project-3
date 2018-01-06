@@ -1,81 +1,176 @@
 import React, {Component} from 'react';
 import Nav from '../../components/Nav';
 import { Input, FormBtn } from "../../components/Form";
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
 
-class Home extends Component {
-  state = {
-    username: '',
-    password: ''
+
+class DonateForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todayDate:moment(),
+      name: '',
+      quantity:'',
+      preparedOn:moment(),
+      shelfLife:'',
+      shelfLifeUnit:'',
+      ingredients:'',
+      location:'',
+      shouldKnow:'',
+      photo:''
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  hanldeInputChange = event => {
-    const {name, value} = event.target;
+  handleChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? taget.checked : taget.va;ue;
+    const name = target.name;
+
     this.setState({
       [name]: value
-    })
+      // value: event.target.value});
   }
-  render () {
+
+  handleDateChange(date) {
+    this.setState({
+      startDate: date
+    });
+  }
+
+  handleSubmit(event) {
+    alert('We thank you for your support. Your donation has been submitted!');
+    event.preventDefault();
+  }
+
+
+
+  render() {
     return (
-      <div>
-        <Nav />
-        <div className='container'>
-          <div className='row'>
-            {
-              /* About me div */
-            }
-            <div className='col-sm-3'>
-              <div className='row'>
-                <div className='col-sm-12'>
-                  <h1>About</h1>
-                  <div id='about'>
-                    <p>
-                    Te nisi multos minim senserit, laboris hic elit voluptate te quo vidisse
-                    arbitrantur, malis non ita export voluptate. Quorum deserunt appellat in duis ad
-                    fabulas, eram voluptate eu expetendis, a elit multos qui litteris do ea
-                    quibusdam consectetur ita incididunt labore nostrud, singulis elit incididunt,
-                    offendit o amet. Quibusdam est veniam.Non ubi firmissimum, quis est voluptate,
-                    eu summis quem ad fabulas ad hic enim incurreret. Singulis ex dolor, in est
-                    dolor tamen ipsum quo ab dolore comprehenderit, illum fabulas exercitation,
-                    incididunt quis irure incurreret enim ad sed fugiat incurreret, ullamco malis o
-                    fabulas reprehenderit, ipsum mandaremus coniunctione. Cillum iudicem non
-                    exercitation, eu duis litteris offendit, non sint offendit cernantur, ut noster
-                    quamquam iudicem.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className='col-sm-5'></div>
-
-            <div className='col-sm-4'>
-              <form>
-                <h1 className='jumbotron'>LogIn: </h1>
-                <label for='username'>Username: </label>
-                <Input
-                  value={this.state.username}
-                  onChange={this.hanldeInputChange}
-                  name='username'
-                  placeholder='Username (Required)'
-                />
-                <label for='password'>Password: </label>
-                <Input
-                  value={this.state.password}
-                  onChange={this.hanldeInputChange}
-                  name='password'
-                  placeholder='Password (Required)'
-                />
-
-                <FormBtn>Sign In</FormBtn>
-
-              </form>
-            </div>
-
+      <form onSubmit={this.handleSubmit}>
+        
+        <label>
+          Date:
+          <div>
+            <DatePicker
+              selected={this.state.todayDate}
+              onChange={this.handleDateChange}
+            />
           </div>
-        </div>
-      </div>
+        </label>
+
+        <br/>
+
+        <label>
+          What are you donating?:
+          <input
+          name="name"
+          type="text"
+          value={this.state.name}
+          onChange={this.handleChange} />
+        </label>
+
+        <br/>
+
+        <label>
+          Quantity!(please specify units):
+          <input
+          name="quantity"
+          type="text"
+          value={this.state.quantity}
+          onChange={this.handleChange} />
+        </label>
+        
+        <br/>
+
+        <label>
+          Time Food Prepared:
+          <input
+          name="preparedOn"
+          <div>
+            <DatePicker
+              selected={this.state.todayDate}
+              onChange={this.handleDateChange}
+            />
+          </div>
+        </label>
+        
+        <br/>
+
+        <label>
+          Shelf Life! (Please specify units):
+          <input
+          name="shelfLife"
+          type="text"
+          value={this.state.shelfLife}
+          onChange={this.handleChange} />
+        </label>
+        // no break here. It specifies units for value above
+        // <label>
+        //   <select
+        //   name="shelfLifeUnit"
+        //   value={this.state.shelfLifeUnit}
+        //   onChange={this.handleChange}>
+        //     <option value="minutes">Minutes</option>
+        //     <option value="hours">Hours</option>
+        //     <option value="days">Days</option>
+        //     <option value="weeks">Weeks</option>
+        //   </select>
+        // </label>
+        
+        <br/>
+
+        <label>
+          Ingredients:
+          <input
+          name="ingredients"
+          type="text"
+          value={this.state.ingredients}
+          onChange={this.handleChange} />
+        </label>
+
+        <br/>
+
+        <label>
+          Location:
+          <input
+          name="location"
+          type="text"
+          value={this.state.location}
+          onChange={this.handleChange} />
+        </label>
+
+        <br/>
+
+        <label>
+          Anything we should know:
+          <input
+           name="shouldKnow"
+           type="text"
+           value={this.state.shouldKnow}
+           onChange={this.handleChange} />
+        </label>
+
+        <br/>
+
+        <label>
+          Photo Link:
+          <input
+          name="photo"
+          type="text"
+          value={this.state.photo}
+          onChange={this.handleChange} />
+        </label>
+
+        <br/>
+
+        <input type="submit" value="Submit" />
+      </form>
     );
   }
 }
-
-export default Home;
