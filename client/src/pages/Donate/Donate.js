@@ -1,13 +1,13 @@
 
 import React, {Component} from 'react';
-import Nav from '../../components/Nav';
-import { Input, FormBtn } from "../../components/Form";
+//import Nav from '../../components/Nav';
+//import { Input, FormBtn } from "../../components/Form";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 
-class Donate extends React.Component {
+class Donate extends Component {
     state = {
       user: null,
       userId:null,
@@ -133,7 +133,13 @@ class Donate extends React.Component {
             <input
               name="preparedTime"
               value={this.state.preparedOn}
-              onChange={this.handleChange} />
+              onChange={this.handleChange}
+            />
+            </label>
+
+            <br/>
+            <label>
+            Date Food Prepared:
             <div>
               <DatePicker
                 selected={this.state.todayDate}
