@@ -25,9 +25,9 @@ module.exports = {
   },
 
   createDonor: function(req,res) {
-    db.donor
+    db.Donor
       .create(req.body)
-      .then(dbDonor => res.json(dbDonor))
+      .then(console.log(req.body), dbDonor => res.json(dbDonor))
       .catch(err => res.json(err));
   },
 };

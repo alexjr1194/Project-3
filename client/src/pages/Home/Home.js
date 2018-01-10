@@ -1,27 +1,12 @@
 import React, {Component} from 'react';
 import Nav from '../../components/Nav';
 import { Input, FormBtn } from "../../components/Form";
-import * as actions from '../../components/Actions'
 
 class Home extends Component {
   state = {
     username: '',
     password: ''
   }
-
-  handleFormSubmit({ email, password }) {
-        this.props.signInUser({ email, password }, this.props);
-    }
-
-    renderAlert() {
-        if (this.props.errorMessage) {
-            return (
-                <div className="alert alert-danger">
-                    <strong>Oops!</strong> {this.props.errorMessage}
-                </div>
-            );
-        }
-    }
 
   hanldeInputChange = event => {
     const {name, value} = event.target;
@@ -67,28 +52,7 @@ class Home extends Component {
               <div className='row'>
 
                 <div className='col-sm-6'>
-                  <form method='post' action='/signup'>
-                    <h1>Sign-Up: </h1>
-                    <label for='name'>First Name: </label>
-                    <Input
-                      name='fName'
-                      placeholder=' First Name(Required)'
-                    />
-                    <label for='lName'>Last Name:</label>
-                    <Input
-                      name='lName'
-                      placeholder='Last Name(Required)'
-                    />
-                    <label for=''></label>
-                    <Input
-                      name=''
-                      placeholder=''
-                    />
-                  </form>
-                </div>
-
-                <div className='col-sm-6'>
-                  <form onSubmit={this.handleFormSubmit.bind(this)} method='post' action='/api/login'>
+                  <form method='post' action='/api/login'>
                     <h1>LogIn: </h1>
                     <label for='username'>Username: </label>
                     <Input

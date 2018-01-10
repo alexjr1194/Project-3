@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 import { Input, FormBtn } from "../../components/Form";
-import * as actions from '../../components/Actions'
 
 class SignUp extends Component {
 
-  handleFormSubmit({ email, password }) {
-        this.props.signUpUser({ email, password }, this.props);
-    }
+  handleSubmit (event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    console.log(data);
+    fetch('/api/donor', {
+      method: 'POST',
+      body: data,
+    });
+  }
 
   render () {
     return (
@@ -18,42 +23,49 @@ class SignUp extends Component {
         </div>
         <div className='row'>
           <div className='col-sm-12'>
-            <form onSubmit={this.handleFormSubmit.bind(this)} method='post' action='/api/signup'>
-              <label for='firstName'>First Name: </label>
-              <Input
+            <form onSubmit={this.handleSubmit}>
+              <label htmlFor='firstName'>First Name: </label>
+              <input
+                id='firstName'
                 name='firstName'
                 placeholder='John (Required)'
               />
-              <label for='lastName'>Last Name:</label>
-              <Input
+              <label htmlFor='lastName'>Last Name:</label>
+              <input
+                id='lastName'
                 name='lastName'
                 placeholder='Appleseed (Required)'
               />
-              <label for='email'>Email: </label>
-              <Input
+              <label htmlFor='email'>Email: </label>
+              <input
+                id='email'
                 name='email'
                 type='email'
                 placeholder='example@example.com (Required)'
               />
-              <label for='password'>Password: </label>
-              <Input
+              <label htmlFor='password'>Password: </label>
+              <input
+                id='password'
                 name='password'
                 type='password'
                 placehold='***********'
               />
-              <label for='DOB'>DOB: </label>
-              <Input
+              <label htmlFor='DOB'>DOB: </label>
+              <input
+                id='DOB'
                 name='DOB'
                 type='date'
                 placeholder='12/12/94(Required)'
               />
-              <label for='location'>Location:</label>
-              <Input
+              <label htmlFor='location'>Location:</label>
+              <input
+                id='location'
                 name='location'
                 placeholder='420 Stone Dr Medocino, CA 98403'
               />
-              <label for='id'>Id #: </label>
-              <Input
+              <label htmlFor='id'>Id #: </label>
+              <input
+                id='id'
                 name='id'
                 placeholder='N2342342342'
               />

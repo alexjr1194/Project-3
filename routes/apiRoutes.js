@@ -4,93 +4,32 @@ const charityController = require("../controllers/charityController.js");
 const donorController = require("../controllers/donorController.js");
 const donationController = require("../controllers/donationController.js");
 
-module.exports = function (app, passport) {
-  router.route('/')
-    .get(function (req, res) {
-      res.render('../client/public/index.html');
-    })
-
-  router.route('/login')
-    .get(function (req, res) {
-      res.render('../client/public/index.html', { message: req.flash('loginMessage') });
-    })
-    .post(passport.authenticate('local-login', {
-      successRedirect: '/profile',
-      failureRedirect: '/login',
-      failureFlash: true
-    }));
-
-    app.get('/signup', function(req, res){
-      res.render('../client/public/index.html', { message: req.flash('signupMessage') });
-    })
-
-    app.post('/signup', function (req, res) {
-      console.log('work')
-    })
-
-	app.get('/profile', isLoggedIn, function(req, res){
-		res.render('../client/public/index.html', { user: req.user });
-	})
 
 
+router.route("/donor/:donor")
+  .get(donorController.findDonor)
 
-	app.get('/:username/:password', function(req, res){
-		var newUser = new User();
-		newUser.local.username = req.params.username;
-		newUser.local.password = req.params.password;
-		console.log(newUser.local.username + " " + newUser.local.password);
-		newUser.save(function(err){
-			if(err)
-				throw err;
-		});
-		res.send("Success!");
-	});
+router.route('/donor')
+  .post(donorController.createDonor)
 
-	app.get('/logout', function(req, res){
-		req.logout();
-		res.redirect('/');
-	})
-};
+router.route("/donor/populate/:donor")
+  .get(donorController.populatedDonor)
 
-function isLoggedIn(req, res, next) {
-	if(req.isAuthenticated()){
-		return next();
-	}
+router.route("/charity/:id")
+  .get(charityController.findCharity)
+  .post(charityController.createCharity)
 
-	res.redirect('/login');
-}
+router.route("/donation")
+  .post(donationController.createDonation)
 
+router.route("/donation/:donor")
+  .get(donationController.findDonations)
 
+router.route("/donation/:charity/available")
+  .get(donationController.findActiveDonations)
 
+router.route("/donation/activedonation/:id")
+  .get(donationController.findOneDonation)
+  .put(donationController.findOneAndUpdate)
 
-
-
-
-
-
-//
-// router.route("/donor/:donor")
-//   .get(donorController.findDonor)
-//   .post(donorController.createDonor)
-//
-// router.route("/donor/populate/:donor")
-//   .get(donorController.populatedDonor)
-//
-// router.route("/charity/:id")
-//   .get(charityController.findCharity)
-//   .post(charityController.createCharity)
-//
-// router.route("/donation")
-//   .post(donationController.createDonation)
-//
-// router.route("/donation/:donor")
-//   .get(donationController.findDonations)
-//
-// router.route("/donation/:charity/available")
-//   .get(donationController.findActiveDonations)
-//
-// router.route("/donation/activedonation/:id")
-//   .get(donationController.findOneDonation)
-//   .put(donationController.findOneAndUpdate)
-//
-// module.exports = router;
+module.exports = router;
