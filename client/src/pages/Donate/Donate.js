@@ -6,24 +6,32 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
+import ImageUploader from 'react-images-uploader';
+import {Link} from 'react-router-dom';
+import './Donate.css'
 
 class Donate extends Component {
     state = {
+      imageFile: null,
       user: null,
       userId:null,
-      donation:{},
       donationId:null,
-      todayDate:moment(),
-      name: '',
-      quantity:'',
-      preparedTime:'',
-      preparedOn: moment(),
-      shelfLife:'',
-      shelfLifeUnit:'',
-      ingredients:'',
-      location:'',
-      shouldKnow:'',
-      photo:''
+      photo:'',
+      chooseButton: "Choose An Image",
+      donation:{
+        todayDate:moment(),
+        name: '',
+        quantity:'',
+        preparedTime:'',
+        preparedOn: moment(),
+        shelfLife:'',
+        shelfLifeUnit:'',
+        ingredients:'',
+        location:'',
+        shouldKnow:''
+
+      },
+
     };
 
   componentDidMount () {
@@ -50,7 +58,7 @@ class Donate extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     state.donation[name] = value;
-    this.setState(state.donation);
+    this.setState(state.donation), console.log(this.state.donation);
   }
 
   handleDateChange = (date) => {
@@ -68,13 +76,17 @@ class Donate extends Component {
     event.preventDefault();
   }
 
+
+
   submitForm = (event) => {
     event.preventDefault();
+    this.handleFormSubmit();
     //alert('We thank you for your support. Your donation has been submitted!');
     const creator = this.state.userId;
     const todayDate = this.state.todayDate;
     const preparedOn = this.state.preparedOn;
-    let donation = {_creator: creator, todayDate:todayDate, preparedOn: preparedOn, ...this.state.donation}
+    const photo = this.state.photo;
+    let donation = {_creator: creator, todayDate:todayDate, preparedOn: preparedOn, photo: photo, ...this.state.donation}
     console.log("test",donation);
     axios.post('/api/donation', donation)
       .then((response) => {
@@ -87,11 +99,54 @@ class Donate extends Component {
       .catch((err)=>console.log(err));
   }
 
+  handleImageChange = (event) => {
+    event.preventDefault();
+    let state = this.state;
+    state.imageFile = event.target.files[0];
+    state.photo = event.target.files[0].name;
+    state.chooseButton = event.target.files[0].name;
+    this.setState(state,()=>console.log(this.state.photo, this.state.imageFile));
+  }
+
+  imageUpload = (file) => {
+    const url = '/api/imageupload';
+    const formData = new FormData();
+    formData.append('file', file);
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    }
+    return  axios.post(url, formData,config)
+  }
+
+  handleFormSubmit = () => {
+    //event.preventDefault() // Stop form submit
+    this.imageUpload(this.state.imageFile).then((response)=>{
+      console.log(response.data);
+    })
+  }
+
   render() {
     return (
 
-      <div>
+      <div className="text-center">
         <h1>{this.state.user} make a donation!</h1>
+        <div className="row justify-content-center">
+          <form>
+            <div className="row justify-content-center">
+              <div className="text-center col-12">
+                <h3>Save an image of your donation</h3>
+              </div>
+            </div>
+            <div className="row justify-content-center">
+              <div className=" fileUpload homeButton col-12 text-center">
+                <span className="btn btn-lg">{this.state.chooseButton}</span>
+                <input name="file" className="btn btn-lg filebtn" type="file" onChange={this.handleImageChange} />
+              </div>
+            </div>
+          </form>
+        </div>
         <form onSubmit={this.submitForm}>
 
           <label>
@@ -132,7 +187,7 @@ class Donate extends Component {
             Time Food Prepared:
             <input
               name="preparedTime"
-              value={this.state.preparedOn}
+              value={this.state.preparedTime}
               onChange={this.handleChange}
             />
             </label>
@@ -194,19 +249,17 @@ class Donate extends Component {
           </label>
 
           <br/>
+          <div className="row justify-content-center donateButtonRow">
+            <div className="homeButton col-6 text-center">
+              <input type="submit" value="Add Donation" className="btn btn-lg donateButton"/>
+            </div>
+          </div>
+          <div className="row justify-content-center buttonRow">
+            <div className="homeButton col-6 text-center">
+              <Link to={"/user/" + this.state.user} className="btn btn-lg">Home</Link>
+            </div>
+          </div>
 
-          <label>
-            Photo Link:
-            <input
-            name="photo"
-            type="text"
-            value={this.state.photo}
-            onChange={this.handleChange} />
-          </label>
-
-          <br/>
-
-          <input type="submit" value="Submit"/>
         </form>
       </div>
     );

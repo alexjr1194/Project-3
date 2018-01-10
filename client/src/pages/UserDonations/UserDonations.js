@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import './UserDonations.css'
 
 class UserDonations extends Component {
 
@@ -26,15 +27,42 @@ class UserDonations extends Component {
   render(){
     const userDonations = this.state.donations.map(donation =>{
       return (
-        <div className="row">
-          <h4 className="col-12">{donation.donation_description}</h4>
-          <p className="col-12">{donation.date}</p>
+        <div className="donationsDiv col-md-8">
+          <div className="row donationRow">
+            <div className="col-12 donation">
+              <h4 className="col-5">{donation.name}</h4>
+              <div className="col-12 imgDiv">
+                <img className="img-fluid donationImg" src={process.env.PUBLIC_URL+"/images/"+donation.photo}/>
+              </div>
+            </div>
+          </div>
+          <div className="row donationRow">
+            <div className="col-12 donation">
+              <p className="col-12">{donation.preparedOn}</p>
+            </div>
+          </div>
+          <div className="row donationRow">
+            <div className="col-12 donation">
+              <p className="col-12">{donation.location}</p>
+            </div>
+          </div>
+
         </div>
       )
     })
     return (
-      <div>
+      <div className="row justify-content-center" >
+        <div className="row titleRow col-md-8">
+          <div className="col-12 text-center">
+            <h2>All donations for {this.state.user}</h2>
+          </div>
+        </div>
         {userDonations}
+        <div className="row col-12 justify-content-center buttonRow">
+          <div className="homeButton col-6 text-center">
+            <Link to={"/user/" + this.state.user} className="btn btn-lg">Home</Link>
+          </div>
+        </div>
       </div>
     )
   }
