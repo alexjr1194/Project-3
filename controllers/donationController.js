@@ -1,6 +1,7 @@
 const db = require("../models");
 
 module.exports = {
+
   findDonations: function(req, res) {
     db.Donation
       .find({_creator: req.params.donor})

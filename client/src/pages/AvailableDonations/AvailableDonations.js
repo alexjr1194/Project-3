@@ -43,8 +43,9 @@ class AvailableDonations extends Component {
       return(
         <div className="row">
           <div className="col-12">
-            <h3>{donation.donation_description}</h3>
-            <p>{donation.date}</p>
+            <h3>{donation.name}</h3>
+            <img src={process.env.PUBLIC_URL+"/images/"+ donation.photo} />
+            <p>{donation.todayDate}</p>
             <div className="btn btn-sm btn-success" data-id={donation._id} onClick={this.donationEventHandler}>Choose Donation</div>
           </div>
         </div>

@@ -1,0 +1,29 @@
+.imgbtn {
+  background-color: #636363;
+  color: #fdfdfd;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload .filebtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.donateButton {
+  background-color: #636363;
+  color: #fdfdfd;
+}
+
+.donateButtonRow {
+  margin-bottom: 20px;
+}
