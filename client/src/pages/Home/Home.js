@@ -1,12 +1,27 @@
 import React, {Component} from 'react';
 import Nav from '../../components/Nav';
 import { Input, FormBtn } from "../../components/Form";
+import * as actions from '../../components/Actions'
 
 class Home extends Component {
   state = {
     username: '',
     password: ''
   }
+
+  handleFormSubmit({ email, password }) {
+        this.props.signInUser({ email, password }, this.props);
+    }
+
+    renderAlert() {
+        if (this.props.errorMessage) {
+            return (
+                <div className="alert alert-danger">
+                    <strong>Oops!</strong> {this.props.errorMessage}
+                </div>
+            );
+        }
+    }
 
   hanldeInputChange = event => {
     const {name, value} = event.target;
@@ -73,7 +88,7 @@ class Home extends Component {
                 </div>
 
                 <div className='col-sm-6'>
-                  <form method='post' action='/signin'>
+                  <form onSubmit={this.handleFormSubmit.bind(this)} method='post' action='/api/login'>
                     <h1>LogIn: </h1>
                     <label for='username'>Username: </label>
                     <Input

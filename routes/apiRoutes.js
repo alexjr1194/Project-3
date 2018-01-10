@@ -4,34 +4,33 @@ const charityController = require("../controllers/charityController.js");
 const donorController = require("../controllers/donorController.js");
 const donationController = require("../controllers/donationController.js");
 
-module.exports = function(app, passport){
-	app.get('/', function(req, res){
-		res.render('../client/public/index.html');
-	});
+module.exports = function (app, passport) {
+  router.route('/')
+    .get(function (req, res) {
+      res.render('../client/public/index.html');
+    })
 
-	app.get('/login', function(req, res){
-		res.render('../client/public/index.html', { message: req.flash('loginMessage') });
-	});
-	app.post('/login', passport.authenticate('local-login', {
-		successRedirect: '/profile',
-		failureRedirect: '/login',
-		failureFlash: true
-	}));
+  router.route('/login')
+    .get(function (req, res) {
+      res.render('../client/public/index.html', { message: req.flash('loginMessage') });
+    })
+    .post(passport.authenticate('local-login', {
+      successRedirect: '/profile',
+      failureRedirect: '/login',
+      failureFlash: true
+    }));
 
-	app.get('/signup', function(req, res){
-		res.render('../client/public/index.html', { message: req.flash('signupMessage') });
-	});
+    app.get('/signup', function(req, res){
+      res.render('../client/public/index.html', { message: req.flash('signupMessage') });
+    })
 
-
-	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect: '/',
-		failureRedirect: '/signup',
-		failureFlash: true
-	}));
+    app.post('/signup', function (req, res) {
+      console.log('work')
+    })
 
 	app.get('/profile', isLoggedIn, function(req, res){
 		res.render('../client/public/index.html', { user: req.user });
-	});
+	})
 
 
 

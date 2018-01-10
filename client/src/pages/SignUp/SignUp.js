@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 import { Input, FormBtn } from "../../components/Form";
+import * as actions from '../../components/Actions'
 
 class SignUp extends Component {
+
+  handleFormSubmit({ email, password }) {
+        this.props.signUpUser({ email, password }, this.props);
+    }
 
   render () {
     return (
@@ -13,7 +18,7 @@ class SignUp extends Component {
         </div>
         <div className='row'>
           <div className='col-sm-12'>
-            <form method='post' action='/signup'>
+            <form onSubmit={this.handleFormSubmit.bind(this)} method='post' action='/api/signup'>
               <label for='firstName'>First Name: </label>
               <Input
                 name='firstName'
@@ -29,6 +34,12 @@ class SignUp extends Component {
                 name='email'
                 type='email'
                 placeholder='example@example.com (Required)'
+              />
+              <label for='password'>Password: </label>
+              <Input
+                name='password'
+                type='password'
+                placehold='***********'
               />
               <label for='DOB'>DOB: </label>
               <Input
