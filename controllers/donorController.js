@@ -24,7 +24,7 @@ module.exports = {
       })
   },
 
-  createDonor: function(req,res) {
+  createDonor: function (req, res) {
     db.Donor
       .create(req.body)
       .then(console.log(req.body), dbDonor => res.json(dbDonor))
