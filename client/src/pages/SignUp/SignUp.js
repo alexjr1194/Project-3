@@ -1,27 +1,36 @@
 import React, {Component} from 'react';
 import { Input, FormBtn } from "../../components/Form";
+import axios from 'axios';
 
 class SignUp extends Component {
-
-  handleSubmit (event) {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    console.log(event.body);
-    console.log(data.get('firstName'));
-    fetch('/api/donor', {
-      method: 'POST',
-      body: {
-        firstName: data.get('firstName'),
-        lastName: data.get('lastName'),
-        email: data.get('email'),
-        password: data.get('password'),
-        dob: data.get('DOB'),
-        address: data.get('location'),
-        id_number: data.get('id_number'),
-        phone_number: data.get('phone_number')
-      }
-    });
+  state = {
+    firstName: '' ,
+    lastName: '' ,
+    email: '' ,
+    password: '' ,
+    dob: '' ,
+    location: '' ,
+    id_number: '' ,
+    phone_number: ''
   }
+
+  onChange = (e) => {
+    const state = this.state
+        state[e.target.name] = e.target.value;
+        this.setState(state);
+  }
+
+  onSubmit = (e) => {
+        e.preventDefault();
+        // get our form data out of state
+        const { firstName, lastName, email, password, dob, location, id_number, phone_number} = this.state;
+
+        axios.post('/api/donor', { firstName, lastName, email, password, dob, location, id_number, phone_number })
+          .then((result) => {
+            //access the results here....
+            console.log(result);
+          });
+      }
 
   render () {
     return (
@@ -33,18 +42,20 @@ class SignUp extends Component {
         </div>
         <div className='row'>
           <div className='col-sm-12'>
-            <form onSubmit={this.handleSubmit.bind()}>
+            <form onSubmit={this.onSubmit}>
               <label htmlFor='firstName'>First Name: </label>
               <Input
                 id='firstName'
                 name='firstName'
                 placeholder='John (Required)'
+                onChange={this.onChange}
               />
               <label htmlFor='lastName'>Last Name:</label>
               <Input
                 id='lastName'
                 name='lastName'
                 placeholder='Appleseed (Required)'
+                onChange={this.onChange}
               />
               <label htmlFor='email'>Email: </label>
               <Input
@@ -52,6 +63,7 @@ class SignUp extends Component {
                 name='email'
                 type='email'
                 placeholder='example@example.com (Required)'
+                onChange={this.onChange}
               />
               <label htmlFor='password'>Password: </label>
               <Input
@@ -59,31 +71,36 @@ class SignUp extends Component {
                 name='password'
                 type='password'
                 placehold='***********'
+                onChange={this.onChange}
               />
-              <label htmlFor='DOB'>DOB: </label>
+              <label htmlFor='dob'>DOB: </label>
               <Input
-                id='DOB'
-                name='DOB'
+                id='dob'
+                name='dob'
                 type='date'
                 placeholder='12/12/94(Required)'
+                onChange={this.onChange}
               />
               <label htmlFor='location'>Location:</label>
               <Input
                 id='location'
                 name='location'
                 placeholder='420 Stone Dr Medocino, CA 98403'
+                onChange={this.onChange}
               />
               <label htmlFor='id'>Id #: </label>
               <Input
                 id='id_number'
                 name='id_number'
                 placeholder='N2342342342'
+                onChange={this.onChange}
               />
-              <label htmlFor='phone_number'>Id #: </label>
+              <label htmlFor='phone_number'>Phone Number: </label>
               <Input
                 id='phone_number'
                 name='phone_number'
                 placeholder='(123)456-7890'
+                onChange={this.onChange}
               />
               <FormBtn>Sign-Up</FormBtn>
             </form>
