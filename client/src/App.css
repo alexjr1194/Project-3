@@ -1,0 +1,14 @@
+
+
+.appTitle {
+  padding: 20px;
+  height: 100px;
+  align-items: center;
+}
+
+
+.title {
+  color: #393D40;
+  font-size: 4em;
+  font-family: 'Lemon', cursive;
+}

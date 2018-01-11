@@ -42,7 +42,7 @@ class User extends Component {
           </div>
           <div className="row justify-content-center">
             <div className="homeButton col-6 text-center">
-              <Link to={"/user/"+this.state.user.name+"/donations"} className="btn btn-lg">Make A Donation!</Link>
+              <Link to={"/user/"+this.state.user.name+"/donations"} className="btn btn-lg"><p className="aAndBtn col-12">Make A Donation!</p></Link>
             </div>
           </div>
           <div className="row justify-content-center">
