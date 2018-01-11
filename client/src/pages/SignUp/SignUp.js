@@ -3,7 +3,7 @@ import { Input, FormBtn } from "../../components/Form";
 
 class SignUp extends Component {
 
-  handleSubmit (event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     console.log(data);
@@ -12,6 +12,12 @@ class SignUp extends Component {
       body: data,
     });
   }
+
+  // handlechange =(event) => {
+  //   event.preventDefault();
+  //   const data = {}
+  //   data[event.target.name] = event.target.value;
+  // }
 
   render () {
     return (
@@ -69,7 +75,7 @@ class SignUp extends Component {
                 name='id'
                 placeholder='N2342342342'
               />
-              <FormBtn>Sign-Up</FormBtn>
+              <button>Sign-Up</button>
             </form>
           </div>
         </div>
