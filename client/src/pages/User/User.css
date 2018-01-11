@@ -1,15 +1,31 @@
 a {
   text-decoration: none;
-  color:#fdfdfd;
+  /*color:#fdfdfd;*/
+  color: black;
   margin: auto;
+  font-weight: bold;
 }
 
 a:hover {
-  color: #d69764
+  color: #d69764;
+  text-decoration: none;
 }
 
 .homeButton {
   margin-top: 40px;
+  border: solid black 2px;
+  /*background-color: #636363;*/
+  /*color: #fdfdfd*/
+  color: black;
+}
+
+.homeButton:hover{
   background-color: #636363;
-  color: #fdfdfd
+  color: #d69764;
+  border: solid #636363 2px;
+}
+
+.aAndBtn:hover {
+  height:100%;
+  color: #d69764;
 }
