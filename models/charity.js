@@ -9,7 +9,7 @@ const charitySchema = new Schema({
   state: {type: String, required: true},
   phone_number: {type: String, required: true},
   email: {type: String, required: true},
-  status: {type: String}
+  status: {type: Boolean, default: true}
 },{collection: 'Charity'});
 
 const Charity = mongoose.model("Charity", charitySchema);

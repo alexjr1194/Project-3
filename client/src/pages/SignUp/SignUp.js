@@ -1,23 +1,38 @@
 import React, {Component} from 'react';
 import { Input, FormBtn } from "../../components/Form";
+import axios from 'axios';
 
 class SignUp extends Component {
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    console.log(data);
-    fetch('/api/donor', {
-      method: 'POST',
-      body: data,
-    });
+  state = {
+    first_name: '' ,
+    last_name: '' ,
+    email: '' ,
+    password: '' ,
+    dob: '' ,
+    address: '' ,
+    id_number: '' ,
+    phone_number: ''
   }
 
-  // handlechange =(event) => {
-  //   event.preventDefault();
-  //   const data = {}
-  //   data[event.target.name] = event.target.value;
-  // }
+  onChange = (e) => {
+    const state = this.state
+        state[e.target.name] = e.target.value;
+        this.setState(state, ()=>console.log(this.state));
+
+  }
+
+  onSubmit = (e) => {
+        e.preventDefault();
+        // get our form data out of state
+        //const { first_name, last_name, email, password, dob, address, id_number, phone_number} = this.state;
+        const data = this.state;
+        console.log(data);
+        axios.post('/api/createdonor', data)
+          .then((result) => {
+            //access the results here....
+            console.log(result.data);
+          });
+      }
 
   render () {
     return (
@@ -29,51 +44,65 @@ class SignUp extends Component {
         </div>
         <div className='row'>
           <div className='col-sm-12'>
-            <form onSubmit={this.handleSubmit}>
-              <label htmlFor='firstName'>First Name: </label>
-              <input
-                id='firstName'
-                name='firstName'
-                placeholder='John (Required)'
+            <form onSubmit={this.onSubmit}>
+              <label htmlFor='first_name'>First Name: </label>
+              <Input
+                id='first_name'
+                name='first_name'
+                placeholder='First name (Required)'
+                onChange={this.onChange}
               />
-              <label htmlFor='lastName'>Last Name:</label>
-              <input
-                id='lastName'
-                name='lastName'
-                placeholder='Appleseed (Required)'
+              <label htmlFor='last_name'>Last Name:</label>
+              <Input
+                id='last_name'
+                name='last_name'
+                placeholder='Last name (Required)'
+                onChange={this.onChange}
               />
               <label htmlFor='email'>Email: </label>
-              <input
+              <Input
                 id='email'
                 name='email'
                 type='email'
                 placeholder='example@example.com (Required)'
+                onChange={this.onChange}
               />
               <label htmlFor='password'>Password: </label>
-              <input
+              <Input
                 id='password'
                 name='password'
                 type='password'
                 placehold='***********'
+                onChange={this.onChange}
               />
-              <label htmlFor='DOB'>DOB: </label>
-              <input
-                id='DOB'
-                name='DOB'
+              <label htmlFor='dob'>DOB: </label>
+              <Input
+                id='dob'
+                name='dob'
                 type='date'
                 placeholder='12/12/94(Required)'
+                onChange={this.onChange}
               />
-              <label htmlFor='location'>Location:</label>
-              <input
-                id='location'
-                name='location'
+              <label htmlFor='address'>Address:</label>
+              <Input
+                id='address'
+                name='address'
                 placeholder='420 Stone Dr Medocino, CA 98403'
+                onChange={this.onChange}
               />
-              <label htmlFor='id'>Id #: </label>
-              <input
-                id='id'
-                name='id'
+              <label htmlFor='id'>Driver License #: </label>
+              <Input
+                id='id_number'
+                name='id_number'
                 placeholder='N2342342342'
+                onChange={this.onChange}
+              />
+              <label htmlFor='phone_number'>Phone Number: </label>
+              <Input
+                id='phone_number'
+                name='phone_number'
+                placeholder='(123)456-7890'
+                onChange={this.onChange}
               />
               <button>Sign-Up</button>
             </form>

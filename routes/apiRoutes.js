@@ -9,7 +9,7 @@ const donationController = require("../controllers/donationController.js");
 router.route("/donor/:donor")
   .get(donorController.findDonor)
 
-router.route('/donor')
+router.route('/createdonor')
   .post(donorController.createDonor)
 
 router.route("/donor/populate/:donor")
