@@ -35,13 +35,13 @@ class SignUp extends Component {
       }
 
     getUser =()=>{
-      axios.get(`/api/donor/${this.state.username}`)
+      axios.get(`/api/donor/${this.state.email}`)
         .then(result =>{
           console.log(result);
           if(!result.data[0]){
             this.props.history.push("/")
           }else {
-            if(result.data[0].email === this.state.username && result.data[0].password === this.state.password){
+            if(result.data[0].email === this.state.email && result.data[0].password === this.state.password){
               this.props.history.push(`/user/${this.state.username}`)
             }else {
             this.props.history.push("/")
