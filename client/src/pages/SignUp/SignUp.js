@@ -34,6 +34,23 @@ class SignUp extends Component {
           });
       }
 
+    getUser =()=>{
+      axios.get(`/api/donor/${this.state.username}`)
+        .then(result =>{
+          console.log(result);
+          if(!result.data[0]){
+            this.props.history.push("/")
+          }else {
+            if(result.data[0].email === this.state.username && result.data[0].password === this.state.password){
+              this.props.history.push(`/user/${this.state.username}`)
+            }else {
+            this.props.history.push("/")
+            }
+          }
+
+        })
+    }
+
   render () {
     return (
       <div className='container'>
@@ -104,7 +121,7 @@ class SignUp extends Component {
                 placeholder='(123)456-7890'
                 onChange={this.onChange}
               />
-              <button>Sign-Up</button>
+              <button onClick={this.getUser}>Sign-Up</button>
             </form>
           </div>
         </div>
