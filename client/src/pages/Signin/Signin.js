@@ -90,7 +90,7 @@ class Signin extends Component {
 
             <div className="row justify-content-center inputRow">
               <div className="inputDiv col-8">
-                <input className="col-12" name='password' placeholder='Password (Required)' onChange={this.hanldeInputChange}/>
+                <input type="password" className="col-12" name='password' placeholder='Password (Required)' onChange={this.hanldeInputChange}/>
               </div>
             </div>
             <div className="row justify-content-center">
@@ -109,7 +109,7 @@ class Signin extends Component {
 
             <div className="row justify-content-center inputRow">
               <div className="inputDiv col-8">
-                <input className="col-12" name='password' placeholder='Password (Required)' onChange={this.hanldeInputChange}/>
+                <input type="password" className="col-12" name='password' placeholder='Password (Required)' onChange={this.hanldeInputChange}/>
               </div>
             </div>
             <div className="row justify-content-center">
