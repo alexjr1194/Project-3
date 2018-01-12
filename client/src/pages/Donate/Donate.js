@@ -27,7 +27,7 @@ class Donate extends Component {
         shelfLife:'',
         shelfLifeUnit:'',
         ingredients:'',
-        location:'',
+        address:'',
         shouldKnow:''
 
       },
@@ -231,7 +231,7 @@ class Donate extends Component {
           <label>
             Location:
             <input
-            name="location"
+            name="address"
             type="text"
             value={this.state.location}
             onChange={this.handleChange} />
