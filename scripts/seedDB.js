@@ -57,6 +57,7 @@ const donorSeed = [
   },
 ];
 
+
 // const donationSeed = [
 //   {
 //     _creator: {type: Schema.Types.ObjectId, ref: "Donation"}
@@ -82,6 +83,7 @@ const donorSeed = [
 //   }
 // ]
 
+
 db.Donor
   .remove({})
   .then(() => db.Donor.collection.insertMany(donorSeed))
@@ -98,6 +100,18 @@ db.Donor
 db.Charity
   .remove({})
   .then(() => db.Charity.collection.insertMany(charitySeed))
+  .then(data => {
+    console.log(data.insertedIds.length + " records inserted");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+
+db.Donation
+  .remove({})
+  .then(() => db.Donation.collection.insertMany(donationSeed))
   .then(data => {
     console.log(data.insertedIds.length + " records inserted");
     process.exit(0);

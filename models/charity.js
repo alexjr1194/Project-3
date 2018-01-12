@@ -9,7 +9,13 @@ const charitySchema = new Schema({
   state: {type: String, required: true},
   phone_number: {type: String, required: true},
   email: {type: String, required: true},
-  status: {type: Boolean, default: true}
+  status: {type: Boolean, default: true},
+  donations: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Donation"
+      }
+    ]
 },{collection: 'Charity'});
 
 const Charity = mongoose.model("Charity", charitySchema);

@@ -3,6 +3,25 @@ const router = require("express").Router();
 const charityController = require("../controllers/charityController.js");
 const donorController = require("../controllers/donorController.js");
 const donationController = require("../controllers/donationController.js");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './client/public/images')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+})
+
+const uploading = multer({
+  storage: storage
+})
+
+router.post('/imageupload', uploading.single('file'), function(req, res) {
+  console.log(req.file)
+  res.json("file uploaded")
+})
 
 
 
@@ -31,5 +50,9 @@ router.route("/donation/:charity/available")
 router.route("/donation/activedonation/:id")
   .get(donationController.findOneDonation)
   .put(donationController.findOneAndUpdate)
+
+
+
+
 
 module.exports = router;

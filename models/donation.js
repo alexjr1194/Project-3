@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const donationSchema = new Schema({
   _creator: {type: Schema.Types.ObjectId, ref: "Donor"},
+  _charity: {type: Schema.Types.ObjectId, ref: "Charity"},
   date: {type: Date, default: Date.now},
   donation_description: {type: String, required: true},
   quantity: {type: String, required: true},
