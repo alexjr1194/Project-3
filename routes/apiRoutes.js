@@ -1,3 +1,4 @@
+const User = require('../models/donor.js');
 const router = require("express").Router();
 const charityController = require("../controllers/charityController.js");
 const donorController = require("../controllers/donorController.js");
@@ -22,8 +23,12 @@ router.post('/imageupload', uploading.single('file'), function(req, res) {
   res.json("file uploaded")
 })
 
+
+
 router.route("/donor/:donor")
   .get(donorController.findDonor)
+
+router.route('/createdonor')
   .post(donorController.createDonor)
 
 router.route("/donor/populate/:donor")

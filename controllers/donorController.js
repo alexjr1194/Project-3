@@ -24,10 +24,14 @@ module.exports = {
       })
   },
 
-  createDonor: function(req,res) {
-    db.donor
+  createDonor: function (req, res) {
+    console.log(req.body);
+    db.Donor
       .create(req.body)
-      .then(dbDonor => res.json(dbDonor))
+      .then(dbDonor => {
+        console.log(req.body, dbdonor);
+        res.json(dbDonor)
+      })
       .catch(err => res.json(err));
   },
 };
