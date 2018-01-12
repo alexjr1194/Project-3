@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import User from './pages/User';
 import SignUp from './pages/SignUp';
+import CharitySignUp from './pages/CharitySignUp'
 import SignUpHome from './pages/SignUpHome';
 import Signin from './pages/Signin';
 import Reciept from './pages/Reciept';
@@ -42,7 +43,8 @@ class App extends Component {
               <Route exact path='/signup/' component={SignUpHome}/>
               <Route exact path='/user/:id' component={User}/>
               <Route exact path='/signin/:role' component={Signin}/>
-              <Route exact path='/signup/:role' component={SignUp}/>
+              <Route exact path='/signup/donor' component={SignUp}/>
+              <Route exact path='/signup/charity' component={CharitySignUp}/>
               <Route exact path='/user/:id/donations' component={Donate}/>
               <Route exact path='/user/:id/reciept/:number' component={Reciept}/>
               <Route exact path='/user/:id/donations/userdonations' component={UserDonations}/>

@@ -31,12 +31,14 @@ router.route("/donor/:donor")
 router.route('/createdonor')
   .post(donorController.createDonor)
 
+router.route('/createcharity')
+  .post(charityController.createCharity)
+
 router.route("/donor/populate/:donor")
   .get(donorController.populatedDonor)
 
 router.route("/charity/:id")
   .get(charityController.findCharity)
-  .post(charityController.createCharity)
 
 router.route("/donation")
   .post(donationController.createDonation)
