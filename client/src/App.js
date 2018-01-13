@@ -18,7 +18,7 @@ import './App.css';
 class App extends Component {
 
   render () {
-    const bgurl = process.env.PUBLIC_URL+"/images/bread.jpg"
+    const bgurl = process.env.PUBLIC_URL+"/images/backgroundbread.jpg"
     const appStyle = {
          backgroundImage: "url("+bgurl+")",
          minHeight: "100vh",
@@ -32,7 +32,8 @@ class App extends Component {
         <div className="appTitle jumbotron-fluid align-middle">
           <div className="row justify-content-center">
             <div className="col-12 text-center">
-              <h1 className="title">Project-3</h1>
+              <h1 className="title">2Gether</h1>
+              <h3 className="subTitle">We make a difference!</h3>
             </div>
           </div>
         </div>

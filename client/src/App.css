@@ -13,3 +13,79 @@
   font-size: 4em;
   font-family: 'Lemon', cursive;
 }
+
+.subTitle {
+  color: #393D40;
+  font-family: 'Lemon', cursive;
+}
+
+.itemsContainer {
+  margin-top: 60px;
+  border: solid black 2px;
+  border-radius: 25px;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  background-color: rgba(255,255,240, 0.5)
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  margin: auto;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #d69764;
+  text-decoration: none;
+}
+
+.homeButton {
+  margin-top: 40px;
+  border: solid black 2px;
+  background-color: rgba(238,117,0,0.5);
+  color: black;
+}
+
+.homeButton:hover{
+  background-color: rgba(99,99,99,0.85);
+}
+
+.aAndBtn:hover {
+  height:100%;
+  color: #EE7500;
+}
+
+.donationsDiv{
+  border-bottom: solid black 1px;
+  margin-top: 20px;
+}
+
+.donationRow {
+
+}
+
+.titleRow {
+  border-bottom: solid black 1px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.buttonRow {
+  margin-bottom: 20px;
+}
+
+.inputRow {
+  margin-bottom: 10px;
+  margin-top: 40px;
+}
+
+.receiptRow {
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.donationImg {
+  min-width: 100%;
+  max-width: 100%;
+}

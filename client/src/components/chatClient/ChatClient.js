@@ -13,12 +13,12 @@ class ChatClient extends Component {
 
   componentDidMount() {
     this.connectSocket();
-    this.getMessage();
+
   }
 
   connectSocket = () => {
+
     let socket = io.connect('http://localhost:3001');
-    this.setState({socket: socket});
     socket.on('connect', (data)=>{
       console.log("socket connected");
       socket.emit("join", "hello from the client")
@@ -28,19 +28,6 @@ class ChatClient extends Component {
       })
     })
   }
-
-
-  sendMessage = () => {
-        //let socket = io.connect('http://localhost:3001');
-        this.state.socket.emit('chat', this.state.message)
-    }
-
-  getMessage = (event) => {
-    let message = this.state.message;
-    message = event.target.value;
-  }
-
-
 
   render() {
     const chats = this.state.chatMessages.map(message => {

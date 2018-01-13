@@ -26,12 +26,22 @@ class Charity extends Component {
 
     return (
       <div>
-        <h1>Welcome {this.state.charity.name}</h1>
-        <div className="col-12 row justify-content-center" >
-          <div className="btn btn-lg btn-warning"><Link to={"/charity/"+this.state.charity._id+"/availabledonations/"}>View Available Donations</Link></div>
-        </div>
-        <div className="col-12 row justify-content-center">
-          <div className="btn btn-lg btn-warning"><Link to="#">View Past Accepted Donations</Link></div>
+        <div className="container-fluid col-8 itemsContainer">
+          <div className="row justify-content-center">
+            <div className="col-12 text-center">
+              <h1>Welcome back: {this.state.charity.name}</h1>
+            </div>
+          </div>
+          <div className="row justify-content-center" >
+            <div className="homeButton btn btn-lg col-8">
+              <Link to={"/charity/"+this.state.charity._id+"/availabledonations/"}>View Available Donations</Link>
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <div className="homeButton btn btn-lg col-8">
+              <Link to="#">View Past Accepted Donations</Link>
+            </div>
+          </div>
         </div>
       </div>
     )

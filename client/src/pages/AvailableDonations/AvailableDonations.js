@@ -41,18 +41,52 @@ class AvailableDonations extends Component {
   render() {
     const available = this.state.availableDonations.map(donation => {
       return(
-        <div className="row">
-          <div className="col-12">
-            <h3>{donation.name}</h3>
-            <img src={process.env.PUBLIC_URL+"/images/"+ donation.photo} />
-            <p>{donation.todayDate}</p>
-            <div className="btn btn-sm btn-success" data-id={donation._id} onClick={this.donationEventHandler}>Choose Donation</div>
+        <div className="donationsDiv">
+          <div className="row justify-content-center">
+            <div className="col-12 text-center">
+              <h3>{donation.name}</h3>
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-10 imgDiv">
+                <img className="img-fluid donationImg" src={process.env.PUBLIC_URL+"/images/"+donation.photo}/>
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-12 text-center">
+              <h4>Prepared on: {donation.todayDate}, Shelf Life: {donation.shelfLife}</h4>
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-12 text-center">
+              <h4>location: {donation.address}</h4>
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-12 text-center">
+              <h4>Quantity: {donation.quantity}</h4>
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-12 text-center">
+              <h4>ingredients: {donation.ingredients}</h4>
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-12 text-center">
+              <h4>Additional info: {donation.shouldKnow}</h4>
+            </div>
+          </div>
+          <div className="row justify-content-center buttonRow">
+            <div className="homeButton col-8 btn btn-lg">
+              <div data-id={donation._id} onClick={this.donationEventHandler}>Choose Donation</div>
+            </div>
           </div>
         </div>
       )
     })
     return(
-      <div>
+      <div className="container-fluid col-8 itemsContainer">
         {available}
       </div>
     )
