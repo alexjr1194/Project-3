@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-import './UserDonations.css'
-
 
 class UserDonations extends Component {
 
@@ -28,40 +26,43 @@ class UserDonations extends Component {
   render(){
     const userDonations = this.state.donations.map(donation =>{
       return (
-        <div className="donationsDiv col-md-8">
-          <div className="row donationRow">
-            <div className="col-12 donation">
-              <h4 className="col-5">{donation.name}</h4>
-              <div className="col-12 imgDiv">
+        <div className="donationsDiv">
+          <div className="row justify-content-center">
+            <div className="col-12 donation text-center">
+              <h4>{donation.name}</h4>
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-10 imgDiv">
                 <img className="img-fluid donationImg" src={process.env.PUBLIC_URL+"/images/"+donation.photo}/>
-              </div>
             </div>
           </div>
-          <div className="row donationRow">
+          <div className="row justify-content-center donationRow">
             <div className="col-12 donation">
-              <p className="col-12">{donation.preparedOn}</p>
+              <h4>Prepared on: {donation.preparedOn}</h4>
             </div>
           </div>
-          <div className="row donationRow">
+          <div className="row justify-content-center donationRow">
             <div className="col-12 donation">
-              <p className="col-12">{donation.location}</p>
+              <h4>Location: {donation.location}</h4>
             </div>
           </div>
-
         </div>
       )
     })
     return (
-      <div className="row justify-content-center" >
-        <div className="row titleRow col-md-8">
-          <div className="col-12 text-center">
-            <h2>All donations for {this.state.user}</h2>
+      <div>
+        <div className="container-fluid col-8 itemsContainer" >
+          <div className="row titleRow jusify-content-center">
+            <div className="col-12 text-center">
+              <h2>All donations for {this.state.user}</h2>
+            </div>
           </div>
-        </div>
-        {userDonations}
-        <div className="row col-12 justify-content-center buttonRow">
-          <div className="homeButton col-6 text-center">
-            <Link to={"/user/" + this.state.user} className="btn btn-lg">Home</Link>
+          {userDonations}
+          <div className="row justify-content-center buttonRow">
+            <div className="homeButton col-8 btn btn-lg">
+              <Link to={"/user/" + this.state.user}>Home</Link>
+            </div>
           </div>
         </div>
       </div>

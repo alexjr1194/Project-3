@@ -20,10 +20,15 @@
 }
 
 .donateButton {
-  background-color: #636363;
-  color: #fdfdfd;
+  border: none;
+  background-color: rgba(238,117,0,0.0);
+  color: black;
 }
 
 .donateButtonRow {
   margin-bottom: 20px;
+}
+
+.uploadForm {
+  border-bottom: solid black 1px;
 }

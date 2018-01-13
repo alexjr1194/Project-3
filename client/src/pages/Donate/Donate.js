@@ -76,8 +76,6 @@ class Donate extends Component {
     event.preventDefault();
   }
 
-
-
   submitForm = (event) => {
     event.preventDefault();
     this.handleFormSubmit();
@@ -130,133 +128,142 @@ class Donate extends Component {
   render() {
     return (
 
-      <div className="text-center">
-        <h1>{this.state.user} make a donation!</h1>
+      <div className="container-fluid col-8 itemsContainer">
         <div className="row justify-content-center">
-          <form>
+          <div className="col-12 text-center">
+            <h1>{this.state.user} make a donation!</h1>
+          </div>
+        </div>
+          <form className="uploadForm">
             <div className="row justify-content-center">
               <div className="text-center col-12">
                 <h3>Save an image of your donation</h3>
               </div>
             </div>
             <div className="row justify-content-center">
-              <div className=" fileUpload homeButton col-12 text-center">
+              <div className=" fileUpload homeButton col-8 text-center">
                 <span className="btn btn-lg">{this.state.chooseButton}</span>
                 <input name="file" className="btn btn-lg filebtn" type="file" onChange={this.handleImageChange} />
               </div>
             </div>
           </form>
-        </div>
+          <br/>
+
         <form onSubmit={this.submitForm}>
+          <div className="row justify-content-center">
+              <div className="col-10 inputDiv2">
+                <DatePicker
+                  className="col-12"
+                  selected={this.state.todayDate}
+                  onChange={this.handleDateChange}
+                  placeholderText="Donation date"
+                />
+              </div>
+          </div>
 
-          <label>
-            Date:
-            <div>
-              <DatePicker
-                selected={this.state.todayDate}
-                onChange={this.handleDateChange}
-              />
+          <div className="row justify-content-center inputRow">
+            <div className="inputDiv2 col-10">
+              <input
+              className="col-12"
+              placeholder="What are you donating?"
+              name="name"
+              type="text"
+              value={this.state.name}
+              onChange={this.handleChange} />
             </div>
-          </label>
+          </div>
 
-          <br/>
-
-          <label>
-            What are you donating?:
+          <div className="row justify-content-center inputRow">
+            <div className="inputDiv2 col-10">
             <input
-            name="name"
-            type="text"
-            value={this.state.name}
-            onChange={this.handleChange} />
-          </label>
-
-          <br/>
-
-          <label>
-            Quantity!(please specify units):
-            <input
+            placeholder="Quantity!(please specify units):"
+            className="col-12"
             name="quantity"
             type="text"
             value={this.state.quantity}
             onChange={this.handleChange} />
-          </label>
+            </div>
+          </div>
 
-          <br/>
-
-          <label>
-            Time Food Prepared:
+          <div className="row justify-content-center inputRow">
+            <div className="inputDiv2 col-10">
             <input
+            placeholder="Time Food Prepared:"
+              className="col-12"
               name="preparedTime"
               value={this.state.preparedTime}
               onChange={this.handleChange}
             />
-            </label>
+            </div>
+          </div>
 
-            <br/>
-            <label>
-            Date Food Prepared:
-            <div>
+            <div className="row justify-content-center inputRow">
+              <div className="inputDiv2 col-10">
               <DatePicker
+                className="col-12"
                 selected={this.state.todayDate}
                 onChange={this.handleMadeDate}
+                placeholderText="Donation prepared on"
               />
             </div>
+          </div>
 
-          </label>
-
-          <br/>
-
-          <label>
-            Shelf Life! (Please specify units):
+          <div className="row justify-content-center inputRow">
+            <div className="inputDiv2 col-10">
             <input
+            placeholder="Shelf Life"
+            className="col-12"
             name="shelfLife"
             type="text"
             value={this.state.shelfLife}
             onChange={this.handleChange} />
-          </label>
+            </div>
+          </div>
 
-          <br/>
-
-          <label>
-            Ingredients:
+          <div className="row justify-content-center inputRow">
+            <div className="inputDiv2 col-10">
             <input
+            placeholder="Ingredients:"
+            className="col-12"
             name="ingredients"
             type="text"
             value={this.state.ingredients}
             onChange={this.handleChange} />
-          </label>
+            </div>
+          </div>
 
-          <br/>
-
-          <label>
-            Location:
+          <div className="row justify-content-center inputRow">
+            <div className="inputDiv2 col-10">
             <input
+            placeholder="Donation address"
+            className="col-12"
             name="address"
             type="text"
-            value={this.state.location}
+            value={this.state.address}
             onChange={this.handleChange} />
-          </label>
+            </div>
+          </div>
 
-          <br/>
-
-          <label>
-            Anything we should know:
+          <div className="row justify-content-center inputRow">
+            <div className="inputDiv2 col-10">
             <input
+             placeholder="Anything we should know:"
+             className="col-12"
              name="shouldKnow"
              type="text"
              value={this.state.shouldKnow}
              onChange={this.handleChange} />
-          </label>
+             </div>
+           </div>
 
-          <br/>
           <div className="row justify-content-center donateButtonRow">
-            <div className="homeButton col-6 text-center">
-              <input type="submit" value="Add Donation" className="btn btn-lg donateButton"/>
+            <div className="homeButton col-8 btn btn-lg text-center">
+              <input type="submit" value="Add Donation" className="col-12 donateButton"/>
             </div>
           </div>
           <div className="row justify-content-center buttonRow">
-            <div className="homeButton col-6 text-center">
-              <Link to={"/user/" + this.state.user} className="btn btn-lg">Home</Link>
+            <div className="homeButton col-8 btn btn-lg text-center">
+              <Link to={"/user/" + this.state.user} className="col-12">Home</Link>
             </div>
           </div>
 

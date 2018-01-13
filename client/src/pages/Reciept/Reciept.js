@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
-import './Reciept.css'
 
 class Reciept extends Component {
   state = {
@@ -37,29 +36,35 @@ class Reciept extends Component {
     const user = this.state.user;
     const donationId = this.state.donationId;
     return (
-      <div className="container col-12">
-        <div className="row justify-content-center receiptRow">
-          <h2>Thank You {this.state.user}</h2>
-        </div>
-        <div className="row justify-content-center receiptRow">
-          <h4>for donation number {this.state.donationNumber} </h4>
-        </div>
-        <div className="row justify-content-center">
-          <div className="row col-12 justify-content-center buttonRow">
-            <div className="homeButton col-6 text-center">
-              <Link to={"/user/" + user} className="btn btn-lg">Home</Link>
+      <div>
+        <div className="container-fluid col-8 itemsContainer">
+          <div className="row justify-content-center receiptRow">
+            <div className="col-12 text-center">
+              <h2>Thank You {this.state.user}</h2>
             </div>
           </div>
-          <div className="row col-12 justify-content-center buttonRow">
-            <div className="homeButton col-6 text-center">
-                <Link to={"/user/" +user+ "/donations/activedonation/"+donationId} className="btn btn-lg">Track Donation</Link>
+          <div className="row justify-content-center receiptRow">
+            <div className="col-12 text-center">
+              <h4>for donation number {this.state.donationNumber} </h4>
             </div>
           </div>
-          <div className="row col-12 justify-content-center buttonRow">
-            <div className="homeButton col-6 text-center">
-              <Link to={"/user/"+user+"/donations/userdonations"} className="btn btn-lg">View All Donations</Link>
+
+          <div className="row justify-content-center buttonRow">
+            <div className="homeButton col-8 btn btn-lg">
+              <Link to={"/user/" + user}>Home</Link>
             </div>
           </div>
+          <div className="row justify-content-center buttonRow">
+            <div className="homeButton col-8 btn btn-lg">
+              <Link to={"/user/" +user+ "/donations/activedonation/"+donationId}>Track Donation</Link>
+            </div>
+          </div>
+          <div className="row justify-content-center buttonRow">
+            <div className="homeButton col-8 btn btn-lg">
+              <Link to={"/user/"+user+"/donations/userdonations"}>View All Donations</Link>
+            </div>
+          </div>
+
         </div>
       </div>
     )

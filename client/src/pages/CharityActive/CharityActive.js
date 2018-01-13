@@ -22,13 +22,25 @@ class CharityActive extends Component {
 
   render() {
     return(
-      <div>
-        <div className="row ">
-          <div className="col-12">
-            <h2>{this.state.donation.donation_description}</h2>
+      <div className="container-fluid col-8 itemsContainer">
+      <div className="row justify-content-center">
+        <div className="col-12 text-center">
+          <h2>Thank you for choosing</h2>
+        </div>
+      </div>
+        <div className="row justify-content-center">
+          <div className="col-12 text-center">
+            <h2>{this.state.donation.name}</h2>
           </div>
-          <div className="col-12">
-            <h3>{this.state.donation.date}</h3>
+        </div>
+        <div className="row justify-content-center">
+          <div className="col-10 imgDiv">
+              <img className="img-fluid donationImg" src={process.env.PUBLIC_URL+"/images/"+this.state.donation.photo}/>
+          </div>
+        </div>
+        <div className="row justify-content-center">
+          <div className="col-12 text-center">
+            <h4>Donated on: {this.state.donation.preparedOn}</h4>
           </div>
         </div>
       </div>

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './Signin.css'
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
@@ -74,17 +73,17 @@ class Signin extends Component {
   render() {
     return(
       <div>
-        <div className="donor container-fluid col-8">
+        <div className="donor container-fluid col-8 itemsContainer">
           <div className="row justify-content-center">
-            <div className="col-8 text-center">
-              <h3 className="col-12">{this.state.role} sign in</h3>
+            <div className="col-12 text-center">
+              <h3 className="">{this.state.role} sign in</h3>
             </div>
           </div>
           <form id='donorForm'>
 
             <div className="row justify-content-center inputRow">
               <div className="inputDiv col-8">
-                <input className="col-12" name='username' placeholder='Username (Required)'onChange={this.hanldeInputChange}/>
+                <input className="col-12" name='username' placeholder='Email (Required)'onChange={this.hanldeInputChange}/>
               </div>
             </div>
 
