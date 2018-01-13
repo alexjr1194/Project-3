@@ -11,12 +11,12 @@
 .title {
   color: #393D40;
   font-size: 4em;
-  font-family: 'Lemon', cursive;
+  font-family: 'Kaushan Script', cursive;
 }
 
 .subTitle {
   color: #393D40;
-  font-family: 'Lemon', cursive;
+  font-family: 'Kaushan Script', cursive;
 }
 
 .itemsContainer {
@@ -88,4 +88,27 @@ a:hover {
 .donationImg {
   min-width: 100%;
   max-width: 100%;
+}
+
+.googleMap {
+  position: relative;
+  padding-bottom: 75%;
+  height: 0;
+  overflow: hidden;
+}
+
+.googleMap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.activeEnd {
+  border-bottom: solid black 1px;
+}
+
+.mapRow {
+  margin-top: 40px;
 }
